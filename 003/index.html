@@ -55,8 +55,31 @@
             for(var i=0;i<len;i++){
                 var oKbd = document.createElement('kbd');
                 oKbd.className = 'key';
-                var text =keys[index][i];
-                oKbd.textContent = text;
+                //取到对应的k
+                var text = keys[index][i];
+                var oSpan =document.createElement('span');
+                oSpan.className = 'text';
+                oSpan.textContent = text ;
+                oKbd.appendChild(oSpan);
+                
+
+                var oImg =document.createElement('img');
+                //如果href存在就设置图片
+                var imgAddress = hash[keys[index][i]];
+                
+                if(imgAddress){
+                    oImg.src = 'http://'+imgAddress+'/favicon.ico';
+                    
+                }else{
+                    oImg.src = 'https://i.loli.net/2017/11/12/5a0734adbf9c8.png';
+                }
+                //还有的情况是 你访问的网站没有favicon.ico文件
+                oImg.onerror = function(ev){
+                    var target = ev.target;
+                    target.src = 'https://i.loli.net/2017/11/12/5a0734adbf9c8.png';
+                }
+
+                oKbd.appendChild(oImg);
                 var oEditBtn = document.createElement('button');
                 oEditBtn.id = text;
                 oEditBtn.textContent = 'E';
@@ -66,8 +89,18 @@
                     hash[key] = newHref ;
                     //缓存
                     localStorage.setItem('zzz',JSON.stringify(hash));
+                    //换网址同时 把对应网站的图标替换  》》button之前的img
+                    var oBtn =ev.target;
+                    var oImgEle = oBtn.previousSibling;
+                    var imgAddress = hash[key];
+                    oImgEle.src = 'http://'+imgAddress+'/favicon.ico';
+                    oImgEle.onerror = function(ev){
+                        var target = ev.target;
+                        target.src = 'https://i.loli.net/2017/11/12/5a0734adbf9c8.png';
+                    }
                 }
                 oKbd.appendChild(oEditBtn);
+
                 oDiv.appendChild(oKbd);
 
             }
