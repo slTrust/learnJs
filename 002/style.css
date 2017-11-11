@@ -1,0 +1,39 @@
+*{margin:0;padding:0;}
+a{text-decoration: none;}
+.clearfix::after{
+    display:block;
+    content:'';
+    clear:both;
+}
+
+#wraper>div>kbd{
+    display:inline-block;
+    border:1px solid red;
+    text-transform: uppercase;
+    width:4em;
+    height:4em;
+    position:relative;
+}
+#wraper>div>kbd>button{
+    position: absolute;
+    right:0;
+    bottom:0;
+    display: none;
+}
+#wraper>div>kbd:hover >button{
+    display: block;
+}
+
+#wraper{
+    display:inline-block;
+}
+main{
+    text-align:center;
+}
+
+#wraper>div:nth-child(2){
+    margin-left: 1em;
+}
+#wraper>div:nth-child(3){
+    margin-left: 2em;
+}
