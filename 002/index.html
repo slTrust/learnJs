@@ -6,12 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./style.css">
     <title>我的导航</title>
+    <style>
+        .key{
+            display: block;
+            width:50px;
+            height: 40px;
+            border:1px solid #363636;
+            color:#d1d1d1;
+            border-radius:6px;
+            background: linear-gradient(to bottom, rgba(41,41,41,1) 0%,rgba(17,17,17,1) 100%);
+            box-shadow:  0px 0px 0px 1px #1a1b1c,0px 0px 0px 2px #1e1f20,0px 2px 0px 2px #030303;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
     <header></header>
     <main>
         <div id="wraper"></div>
     </main>
+    <kbd class="key">s</kbd>
     <footer></footer>
     <script>
         var keys = {
@@ -50,6 +66,7 @@
             var len = keys[index].length;
             for(var i=0;i<len;i++){
                 var oKbd = document.createElement('kbd');
+                oKbd.className = 'key';
                 var text =keys[index][i];
                 oKbd.textContent = text;
                 var oEditBtn = document.createElement('button');
