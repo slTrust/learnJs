@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./style.css">
+    <title>我的导航</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <header></header>
+    <main>
+        <div class="wraper" id="main"></div>
+    </main>
+    <footer></footer>
+    <script>
+        //1初始化数据
+        var baseData = init();
+        var keys = baseData['keys'];
+        var hash = baseData['hash'];
+
+        //2生成键盘 遍历keys hash
+        generatorKeyBoard(keys,hash);
+        //3监听键盘
+        listenToKeyBoard(hash)
+        
+       
+        
+        //初始化数据
+        function init(){
+            var keys = {
+                    '0':['q','w','e','r','t','y','u','i','o','p'],
+                    '1':['a','s','d','f','g','h','j','k','l'],
+                    '2':['z','x','c','v','b','n','m'],
+                    'length':3
+                    }
+
+            var hash = {
+                        'q':'qq.com',
+                        'w':'weibo.com',
+                        'e':'ele.me',
+                        'r':'renren.com',
+                        't':'taobao.com',
+                        'y':'youdao.com',
+                        'u':'',
+                        'i':'',
+                        'o':'',
+                        'p':'',
+                        'a':'apple.com',
+                        's':'shadowsocks.com',
+                        'd':'',
+                        'z':'zhihu.com',
+                        'm':'mi.com'
+                    }
+        
+            var hashLocalStorage = getFromLocalStorage('zzz');
+            if(hashLocalStorage){
+                hash = hashLocalStorage;
+            }
+            return {
+                'keys':keys,
+                'hash':hash
+            };
+        }
+
+        //生成键盘
+        function generatorKeyBoard(keys,hash){
+            for(var index = 0;index<keys['length'];index++){
+                var oDiv = tag('div',{className:'row'});
+                oDiv.className = 'row';
+                main.appendChild(oDiv);
+                var len = keys[index].length;
+                for(var i=0;i<len;i++){
+                    //取到对应的k
+                    var id = keys[index][i];
+                    var oSpan =createSpan(id);
+                    //获取网址
+                    var imgAddress = hash[keys[index][i]];
+                    var oImg = createImg(imgAddress);
+                    var oEditBtn = createButton(id);
+                    //添加到kbd里
+                    var oKbd = tag('kbd');
+                    oKbd.className = 'key';
+                    oKbd.appendChild(oSpan);
+                    oKbd.appendChild(oImg);
+                    oKbd.appendChild(oEditBtn);
+                    oDiv.appendChild(oKbd);
+                }
+            }
+        }
+
+        //监听键盘
+        function listenToKeyBoard(hash){
+            document.onkeypress = function(ev){
+                var key = ev['key'];
+                var myHref = hash[key];
+                window.open('http://'+myHref,'_blank')
+            }
+        }
+
+        //从缓存读取json
+        function getFromLocalStorage(name){
+            return JSON.parse(localStorage.getItem(name)||'null');
+        }
+
+        //创建节点
+        function  tag(tagName){
+            return document.createElement(tagName);
+        }
+
+        function createSpan(textContent){
+            var oSpan = tag('span');
+            oSpan.className = 'text';
+            oSpan.textContent = textContent;
+            return oSpan;
+        }
+
+        function createButton(id){
+            var editBtn = tag('button');
+            editBtn.textContent = 'E';
+            editBtn.id = id;
+            editBtn.onclick = function(ev){
+                var key = ev.target.id
+                var newHref = prompt('给我一个网址'); 
+                hash[key] = newHref ;
+                //缓存
+                localStorage.setItem('zzz',JSON.stringify(hash));
+                //换网址同时 把对应网站的图标替换  》》button之前的img
+                var oBtn =ev.target;
+                var oImgEle = oBtn.previousSibling;
+                var imgAddress = hash[key];
+                oImgEle.src = 'http://'+imgAddress+'/favicon.ico';
+                oImgEle.onerror = function(ev){
+                    var target = ev.target;
+                    target.src = 'https://i.loli.net/2017/11/12/5a0734adbf9c8.png';
+                }
+            }
+            return editBtn;
+        }
+
+        function createImg(imgAddress){
+            var oImg =tag('img');
+            if(imgAddress){
+                oImg.src = 'http://'+imgAddress+'/favicon.ico';
+                
+            }else{
+                oImg.src = 'https://i.loli.net/2017/11/12/5a0734adbf9c8.png';
+            }
+            //还有的情况是 你访问的网站没有favicon.ico文件
+            oImg.onerror = function(ev){
+                var target = ev.target;
+                target.src = 'https://i.loli.net/2017/11/12/5a0734adbf9c8.png';
+            }
+            return oImg;
+        }
+
+   
+    </script>
+</body>
+</html>
