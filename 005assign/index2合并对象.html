@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function test(){
+            var o1 = { a: 1 };
+            var o2 = { b: 2 };
+            var o3 = { c: 3 };
+
+            var obj = Object.assign(o1, o2, o3);
+            console.log(o2)   // o2不会被改变   ==》第一个参数是目标源
+            console.log(obj); // { a: 1, b: 2, c: 3 }
+            console.log(o1);  // { a: 1, b: 2, c: 3 }注意目标对象自身也会改变。
+        }
+        //合并具有相同属性的对象
+        function test2(){
+            //属性被后续参数中具有相同属性的其他对象覆盖。
+            var o1 = { a: 1, b: 1, c: 1 };
+            var o2 = { b: 2, c: 2 };
+            var o3 = { c: 3 };
+
+            var obj = Object.assign({}, o1, o2, o3);
+            console.log(o2)  //{b:2,c:2}  //这次不会改变目标源
+            console.log(obj); // { a: 1, b: 2, c: 3 }
+        }
+        test()
+    </script>
+</body>
+</html>
