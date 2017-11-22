@@ -50,4 +50,3 @@ module.exports = {
         })
 	]
 };
-//yarn add sass-loader node-sass

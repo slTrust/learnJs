@@ -1,21 +1,4 @@
-webpackJsonp([0],{
-
-/***/ 4:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var $ = __webpack_require__(0);
-var Highcharts = __webpack_require__(2);
-
-// 在 Highcharts 加载之后加载功能模块
-__webpack_require__(3)(Highcharts);
-
-$(function () {
-	console.log(1);
-});
-
-/***/ })
-
-},[4]);
+webpackJsonp([2],{4:/*!**************!*\
+  !*** ./a.js ***!
+  \**************/
+function(module,exports,__webpack_require__){"use strict";eval("\n\nvar $ = __webpack_require__(/*! jquery */ 0);\nvar Highcharts = __webpack_require__(/*! highcharts */ 1);\n\n// 在 Highcharts 加载之后加载功能模块\n__webpack_require__(/*! highcharts/modules/exporting */ 2)(Highcharts);\n\n$(function () {\n\tconsole.log(1);\n});//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9zcmMvYS5qcz83ZDhhIl0sInNvdXJjZXNDb250ZW50IjpbImNvbnN0ICQgPSByZXF1aXJlKCdqcXVlcnknKTtcclxuY29uc3QgSGlnaGNoYXJ0cyA9IHJlcXVpcmUoJ2hpZ2hjaGFydHMnKTtcclxuXHJcbi8vIOWcqCBIaWdoY2hhcnRzIOWKoOi9veS5i+WQjuWKoOi9veWKn+iDveaooeWdl1xyXG5yZXF1aXJlKCdoaWdoY2hhcnRzL21vZHVsZXMvZXhwb3J0aW5nJykoSGlnaGNoYXJ0cyk7XHJcblxyXG4kKGZ1bmN0aW9uKCkge1xyXG5cdGNvbnNvbGUubG9nKDEpXHJcbn0pXG5cblxuLy8gV0VCUEFDSyBGT09URVIgLy9cbi8vIHNyYy9hLmpzIl0sIm1hcHBpbmdzIjoiOztBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Iiwic291cmNlUm9vdCI6IiJ9")}},[4]);
