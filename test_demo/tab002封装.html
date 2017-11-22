@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .on{background-color:#0089e1; color:black;}
+        div>div{
+            height: 200px;
+            width: 200px;
+            background: #ccc;
+            line-height: 200px;
+            text-align: center;
+            font-size: 30px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <input type="button" value="图片" class="on"/>
+        <input type="button" value="电影" />
+        <input type="button" value="音乐" />
+        <div style="display:block;">1</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+    <div id="box2">
+            <input type="button" value="图片" class="on"/>
+            <input type="button" value="电影" />
+            <input type="button" value="音乐" />
+            <div style="display:block;">1</div>
+            <div>2</div>
+            <div>3</div>
+        </div>
+   
+    <script>
+        window.onload = function(){
+            tab('box','onclick');
+            tab('box2','onmouseover');
+        }
+
+        function tab(containerId,sEv){
+            var oBox = document.getElementById(containerId);
+            var aBtn = oBox.getElementsByTagName('input');
+            var aDiv = oBox.getElementsByTagName('div');
+
+            //tab选项卡 
+            for(var i=0;i<aBtn.length;i++){
+                //自定义属性
+                aBtn[i]['index'] = i ;
+                aBtn[i][sEv] = function(){
+                    //清空样式
+                    for(var j=0;j<aBtn.length;j++){
+                        aBtn[j].className = '';
+                        aDiv[j].style.display = 'none';
+                    }
+                    //当前元素加样式  
+                    this.className = 'on';
+                    //当前元素对应的模块显示
+                    aDiv[this.index].style.display = 'block';
+
+                }
+            }
+        }
+    </script>
+</body>
+</html>
