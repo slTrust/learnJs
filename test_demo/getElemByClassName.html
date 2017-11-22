@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li{list-style: none; height: 30px;background: #ccc; margin:10px;}
+    </style>
+</head>
+<body>
+    <ul>
+        <li class="red yellow blue"></li>
+        <li class="red2  blue"></li>
+        <li class="red cc blue"></li>
+        <li class="sred yellow aa"></li>
+        <li class="red fdsf cc"></li>
+    </ul>
+    <script>
+        window.onload = function(){
+            var aRedEle = getElemByClassName('red');
+            for(var i=0;i<aRedEle.length;i++){
+                aRedEle[i].style.background = 'pink';
+            }
+        }
+
+        function findInArr(val,arr){
+            var flg = false;
+            for(var i=0;i<arr.length;i++){
+                if(arr[i]==val){
+                    flg = true;
+                }
+            }
+            return flg;
+        }
+
+        function getElemByClassName(name){
+            if(document.getElementsByClassName){
+                return document.getElementsByClassName(name)
+            }else{
+                var aElem = document.getElementsByTagName('*');
+                var resArr = [];
+                for(var i=0;i<aElem.length;i++){
+                    var aClassNameList = aElem[i].className.split(' ');
+                    if(findInArr(name,aClassNameList)){
+                        resArr.push(aElem[i])
+                    }
+                }
+                return resArr;
+            }
+        }
+    </script>
+</body>
+</html>

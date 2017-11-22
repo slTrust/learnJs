@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0;}
+        ul,ol{
+            list-style: none;
+        }
+        li{
+            height: 30px;
+            background: orange;
+            margin:5px;
+        }
+        #box{
+            height: 500px;
+            width: 700px;
+            background: #ccc;
+        }
+        #subbox{
+            height: 200px;
+            width: 200px;
+            background: pink;
+        }
+        #subInner{
+            height: 100px;
+            width: 100px;
+            background: aquamarine;
+        }
+        #posbox{
+            height: 150px;
+            width: 150px;
+            background: greenyellow;
+            position: absolute;
+            right:0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="subbox">
+            <div id="subInner">
+
+            </div>
+        </div>
+        <ul>
+            <li>1</li>
+            <li id="sibling">
+                2 
+                <button id="prev">我的哥哥</button> 
+                <button id="next">我的弟弟</button>
+            </li>
+            <li>3</li>
+        </ul>
+
+        <div id="posbox">
+           <button id="pos1">结构父级</button> 
+           <button id="pos2">定位父级</button>
+        </div>
+    </div>
+    <button id="first">#box的第一个元素</button>
+    <button id="last">#box的最后一个元素</button>
+    <script>
+
+        window.onload = function(){
+            var oBox = document.getElementById('box');
+            var posbox = document.getElementById('posbox');
+            var sibling = document.getElementById('sibling');
+            //结构父级
+            pos1.onclick = function(){
+            console.log( posbox.parentNode);
+            }
+            //定位父级
+            pos2.onclick = function(){
+            console.log( posbox.offsetParent);
+            }
+            //哥哥
+            prev.onclick = function(){
+            var ele =  sibling.previousElementSibling || sibling.previousSibling
+            console.log(ele);
+            }
+            //弟弟
+            next.onclick = function(){
+            var ele =  sibling.nextElementSibling || sibling.nextSibling
+            console.log(ele);
+            }
+
+            //第一个元素
+            first.onclick = function(){
+                var ele  =oBox.firstElementChild||oBox.firstChild;
+                console.log(ele);
+            }
+
+            //最后一个元素
+            last.onclick = function(){
+                var ele  =oBox.lastElementChild||oBox.lastChild;
+                console.log(ele);
+            }
+
+
+
+
+
+        }
+
+        // DOM：
+        //     父子：
+        //         结构父级:	obj.parentNode
+        //         定位父级：	obj.offsetParent
+        //         子级：		父级.children
+        //     兄弟级：
+        //         上一个：	obj.previousElementSibling || obj.previousSibling
+        //         下一个：	obj.nextElementSibling || obj.nextSibling
+        //     首尾节点：
+        //         首节点： 	父级.firstElementChild || 父级.firstChild
+        //         尾节点：	父级.lastElementChild || lastChild
+        //     创建元素：	document.createElement(元素)
+        //     添加元素： - 剪切功能
+        //         后面：	父级.appendChild
+        //         前面:	父级.insertBefore(元素,添加到谁前面)
+        //     删除元素：	父级.removeChild(元素)
+        //     克隆元素	obj.cloneNode(是否深度克隆)
+
+        //     信息
+        //     滚动条距离
+        //         距上	document.documentElement.scrollTop || document.body.scrollTop
+        //         距左	document.documentElement.scrollLeft || document.body.scrollLeft
+        //     可视区
+        //         宽度	document.documentElement.clientWidth
+        //         高度	document.documentElement.clientHeight
+        //     物体
+        //         宽度		obj.offsetWidth
+        //         高度		obj.offsetHeight
+        //         距左		obj.offsetLeft
+        //         距上		obj.offsetTop
+        //         绝对距离	getPos(obj).left | getPos(obj).top 	自己封装的
+        //     属性
+        //         获取属性	getAttribute(属性名)
+        //         设置属性	setAttribute(属性名,属性值)
+        //         删除属性	removeAttribute(属性名)
+    </script>
+</body>
+</html>

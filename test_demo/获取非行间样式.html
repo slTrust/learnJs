@@ -28,6 +28,10 @@
             }
         }
 
+        function getElemStyle2(elem,attr){
+            return (elem.currentStyle||getComputedStyle(elem,false))[attr];
+        }
+
     </script>
 </body>
 </html>

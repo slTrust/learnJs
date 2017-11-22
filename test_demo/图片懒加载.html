@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        #box{
+            border:2px solid #ccc;
+            padding:10px;
+            list-style: none;
+        }
+        #box>li{
+            height: 200px;
+            width: 300px;
+            border-radius: 5px;
+            float:left;
+            padding:5px;
+            border:1px solid #d5d5d5;
+        }
+        #box>li>img{
+            height: 200px;
+            width: 300px;
+            display: inline-block;
+        }
+
+        .clearfix::after{
+            display: block;
+            clear: both;
+            content:'';
+        }
+    </style>
+    <title>Document</title>
+    
+</head>
+<body>
+    <ul id="box" class="clearfix">
+        <!-- <li><img src="" alt="_暂无图片_"></li> -->
+    </ul>
+    <script>
+        //图片资源的路径    用','分割
+        var urlStr = './lazyload/images/th-590543.jpg,./lazyload/images/th-590544.jpg,./lazyload/images/th-590545.jpg,./lazyload/images/th-590546.jpg,./lazyload/images/th-590547.jpg,./lazyload/images/th-590548.jpg,./lazyload/images/th-590549.jpg,./lazyload/images/th-590550.jpg,./lazyload/images/th-590551.jpg,./lazyload/images/th-590556.jpg,./lazyload/images/th-590559.jpg,./lazyload/images/th-590568.jpg,./lazyload/images/th-590569.jpg,./lazyload/images/th-590584.jpg,./lazyload/images/th-590588.jpg,./lazyload/images/th-590589.jpg,./lazyload/images/th-590591.jpg,./lazyload/images/th-590592.jpg,./lazyload/images/th-590594.jpg,./lazyload/images/th-590595.jpg,./lazyload/images/th-590600.jpg,./lazyload/images/th-590601.jpg,./lazyload/images/th-590602.jpg,./lazyload/images/th-590604.jpg,./lazyload/images/th-590613.jpg,./lazyload/images/th-590608.jpg,./lazyload/images/th-590615.jpg,./lazyload/images/th-590621.jpg,./lazyload/images/th-590623.jpg,./lazyload/images/th-590625.jpg,./lazyload/images/th-590627.jpg,./lazyload/images/th-590629.jpg,./lazyload/images/th-590630.jpg,./lazyload/images/th-590631.jpg,./lazyload/images/th-590632.jpg,./lazyload/images/th-590633.jpg,./lazyload/images/th-590634.jpg,./lazyload/images/th-590635.jpg,./lazyload/images/th-590637.jpg,./lazyload/images/th-590640.jpg,./lazyload/images/th-590643.jpg,./lazyload/images/th-590644.jpg,./lazyload/images/th-590648.jpg,./lazyload/images/th-590660.jpg,./lazyload/images/th-590651.jpg,./lazyload/images/th-590668.jpg,./lazyload/images/th-590670.jpg,./lazyload/images/th-590619.jpg,./lazyload/images/th-590671.jpg,./lazyload/images/th-590673.jpg,./lazyload/images/th-590676.jpg,./lazyload/images/th-590678.jpg,./lazyload/images/th-590680.jpg,./lazyload/images/th-590682.jpg,./lazyload/images/th-590683.jpg,./lazyload/images/th-590684.jpg,./lazyload/images/th-590688.jpg,./lazyload/images/th-590689.jpg,./lazyload/images/th-590691.jpg,./lazyload/images/th-590694.jpg,./lazyload/images/th-590695.jpg,./lazyload/images/th-590692.jpg,./lazyload/images/th-590696.jpg,./lazyload/images/th-590698.jpg,./lazyload/images/th-590702.jpg,./lazyload/images/th-590703.jpg,./lazyload/images/th-590704.jpg,./lazyload/images/th-590706.jpg,./lazyload/images/th-590705.jpg,./lazyload/images/th-590707.jpg,./lazyload/images/th-590708.jpg,./lazyload/images/th-590709.jpg,./lazyload/images/th-590710.jpg,./lazyload/images/th-590711.jpg,./lazyload/images/th-590712.jpg,./lazyload/images/th-590713.jpg,./lazyload/images/th-590714.jpg,./lazyload/images/th-590716.jpg,./lazyload/images/th-590717.jpg,./lazyload/images/th-590718.jpg,./lazyload/images/th-590720.jpg,./lazyload/images/th-590719.jpg,./lazyload/images/th-590721.jpg,./lazyload/images/th-590722.jpg,./lazyload/images/th-590723.jpg,./lazyload/images/th-590742.jpg,./lazyload/images/th-590741.jpg,./lazyload/images/th-590743.jpg,./lazyload/images/th-590744.jpg,./lazyload/images/th-590745.jpg,./lazyload/images/th-590766.jpg,./lazyload/images/th-590767.jpg,./lazyload/images/th-590769.jpg,./lazyload/images/th-590770.jpg,./lazyload/images/th-590772.jpg,./lazyload/images/th-590771.jpg,./lazyload/images/th-590778.jpg,./lazyload/images/th-590779.jpg,./lazyload/images/th-590783.jpg,./lazyload/images/th-590802.jpg,./lazyload/images/th-590803.jpg,./lazyload/images/th-590804.jpg,./lazyload/images/th-590819.jpg,./lazyload/images/th-590820.jpg,./lazyload/images/th-590821.jpg,./lazyload/images/th-590822.jpg,./lazyload/images/th-590824.jpg,./lazyload/images/th-590825.jpg,./lazyload/images/th-590827.jpg,./lazyload/images/th-590831.jpg,./lazyload/images/th-590836.jpg,./lazyload/images/th-590840.jpg,./lazyload/images/th-590843.jpg,./lazyload/images/th-590805.jpg,./lazyload/images/th-590861.jpg,./lazyload/images/th-590865.jpg,./lazyload/images/th-590868.jpg,./lazyload/images/th-590869.jpg,./lazyload/images/th-590870.jpg,./lazyload/images/th-590874.jpg,./lazyload/images/th-590876.jpg,./lazyload/images/th-590875.jpg,./lazyload/images/th-590877.jpg,./lazyload/images/th-590893.jpg,./lazyload/images/th-590895.jpg,./lazyload/images/th-590896.jpg,./lazyload/images/th-590897.jpg,./lazyload/images/th-590898.jpg,./lazyload/images/th-590922.jpg,./lazyload/images/th-590944.jpg,./lazyload/images/th-590672.jpg,./lazyload/images/th-590946.jpg,./lazyload/images/th-590947.jpg,./lazyload/images/th-590948.jpg,./lazyload/images/th-590966.jpg,./lazyload/images/th-590965.jpg,./lazyload/images/th-590967.jpg,./lazyload/images/th-590968.jpg,./lazyload/images/th-590969.jpg,./lazyload/images/th-590970.jpg,./lazyload/images/th-590975.jpg,./lazyload/images/th-590978.jpg,./lazyload/images/th-590982.jpg,./lazyload/images/th-590987.jpg,./lazyload/images/th-590939.jpg,./lazyload/images/th-590993.jpg,./lazyload/images/th-590994.jpg,./lazyload/images/th-590995.jpg,./lazyload/images/th-590998.jpg,./lazyload/images/th-591013.jpg,./lazyload/images/th-591015.jpg,./lazyload/images/th-591014.jpg,./lazyload/images/th-591016.jpg,./lazyload/images/th-591022.jpg,./lazyload/images/th-591023.jpg,./lazyload/images/th-591029.jpg,./lazyload/images/th-591057.jpg,./lazyload/images/th-591058.jpg,./lazyload/images/th-591060.jpg,./lazyload/images/th-591064.jpg,./lazyload/images/th-590715.jpg,./lazyload/images/th-591066.jpg,./lazyload/images/th-591067.jpg,./lazyload/images/th-591070.jpg,./lazyload/images/th-591068.jpg,./lazyload/images/th-591071.jpg,./lazyload/images/th-591072.jpg,./lazyload/images/th-591081.jpg,./lazyload/images/th-591083.jpg,./lazyload/images/th-591084.jpg,./lazyload/images/th-591085.jpg,./lazyload/images/th-591086.jpg,./lazyload/images/th-591087.jpg,./lazyload/images/th-591088.jpg,./lazyload/images/th-591090.jpg,./lazyload/images/th-591089.jpg,./lazyload/images/th-591091.jpg,./lazyload/images/th-591092.jpg,./lazyload/images/th-591093.jpg,./lazyload/images/th-591094.jpg,./lazyload/images/th-591095.jpg,./lazyload/images/th-591101.jpg,./lazyload/images/th-591120.jpg,./lazyload/images/th-591124.jpg,./lazyload/images/th-590984.jpg,./lazyload/images/th-591125.jpg,./lazyload/images/th-591126.jpg,./lazyload/images/th-591128.jpg,./lazyload/images/th-591129.jpg,./lazyload/images/th-591132.jpg,./lazyload/images/th-591133.jpg,./lazyload/images/th-591134.jpg,./lazyload/images/th-591135.jpg,./lazyload/images/th-591137.jpg,./lazyload/images/th-591136.jpg,./lazyload/images/th-591138.jpg,./lazyload/images/th-591145.jpg,./lazyload/images/th-591146.jpg,./lazyload/images/th-591147.jpg,./lazyload/images/th-591149.jpg,./lazyload/images/th-591150.jpg,./lazyload/images/th-591151.jpg,./lazyload/images/th-591065.jpg,./lazyload/images/th-591152.jpg,./lazyload/images/th-591154.jpg,./lazyload/images/th-591155.jpg,./lazyload/images/th-591156.jpg,./lazyload/images/th-591158.jpg,./lazyload/images/th-591153.jpg,./lazyload/images/th-591159.jpg,./lazyload/images/th-591166.jpg,./lazyload/images/th-591167.jpg,./lazyload/images/th-591102.jpg,./lazyload/images/th-591177.jpg,./lazyload/images/th-591187.jpg,./lazyload/images/th-591203.jpg,./lazyload/images/th-591224.jpg,./lazyload/images/th-591225.jpg,./lazyload/images/th-591226.jpg,./lazyload/images/th-591227.jpg,./lazyload/images/th-591230.jpg,./lazyload/images/th-591233.jpg,./lazyload/images/th-591231.jpg,./lazyload/images/th-591238.jpg,./lazyload/images/th-591239.jpg,./lazyload/images/th-591243.jpg,./lazyload/images/th-591244.jpg,./lazyload/images/th-591257.jpg,./lazyload/images/th-591259.jpg,./lazyload/images/th-591258.jpg,./lazyload/images/th-591260.jpg,./lazyload/images/th-591261.jpg,./lazyload/images/th-591265.jpg,./lazyload/images/th-591266.jpg,./lazyload/images/th-591267.jpg,./lazyload/images/th-591269.jpg,./lazyload/images/th-591268.jpg,./lazyload/images/th-591270.jpg,./lazyload/images/th-591272.jpg,./lazyload/images/th-591273.jpg,./lazyload/images/th-591284.jpg,./lazyload/images/th-591290.jpg,./lazyload/images/th-591295.jpg,./lazyload/images/th-591292.jpg,./lazyload/images/th-591299.jpg,./lazyload/images/th-591300.jpg,./lazyload/images/th-591311.jpg,./lazyload/images/th-591313.jpg,./lazyload/images/th-591315.jpg,./lazyload/images/th-591318.jpg,./lazyload/images/th-591319.jpg,./lazyload/images/th-591325.jpg,./lazyload/images/th-591320.jpg,./lazyload/images/th-591326.jpg,./lazyload/images/th-591329.jpg,./lazyload/images/th-591334.jpg,./lazyload/images/th-591336.jpg,./lazyload/images/th-591157.jpg,./lazyload/images/th-591186.jpg';
+        //资源数组
+        var aUrl = urlStr.split(',');
+        window.onload = function(){
+            var oBox =document.getElementById('box');
+            var count = aUrl.length;
+            //初始化对应url数量的节点
+            initDom(oBox,count);
+            listenToEvent(aUrl);
+
+
+        }
+        window.onscroll = window.onresize = function(){
+            listenToEvent(aUrl);
+        }
+
+        function listenToEvent(aUrl){
+            //获取所有的img
+            var aImg=document.getElementsByTagName('img');	
+            //获取滚动条
+            var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+            //获取可视区
+            var clientH=document.documentElement.clientHeight;
+            for(var i=0;i<aImg.length;i++){
+                var aImgH=getPos(aImg[i]).top;
+                if(scrollTop+clientH>=aImgH){
+                    //alert(aImg[0].getAttribute('_src'));
+                    aImg[i].src = aUrl[i];
+                }	
+            }
+        }
+
+
+        function initDom(container,len){
+            for(var i = 0;i<len;i++){
+                var oLi  = createLi();
+                var oImg = document.createElement('img');
+                oImg.src = '';
+                oImg.alt = '暂无图片';
+                oLi.appendChild(oImg);
+                container.appendChild(oLi);
+            }
+        }
+
+        function createLi(){
+            var oLi = document.createElement('li');
+           
+            return oLi;
+        }
+
+
+        function getPos(obj){
+            var l=0;
+            var t=0;
+            while(obj){
+                l+=obj.offsetLeft;
+                t+=obj.offsetTop;
+                
+                obj=obj.offsetParent;	
+            }
+            return {left:l,top:t};
+        }
+       
+
+    </script>
+</body>
+</html>
