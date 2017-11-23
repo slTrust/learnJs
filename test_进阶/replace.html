@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>replace</title>
+<style></style>
+<script>
+	var str = '小明是村里的村草,小明今年20岁了,小明喜欢韩小花,但是韩小花在清华大学读硕士,生活标准和小明不在同一水平线,所有说小明只能暗恋着韩小花';
+
+	//正则  全局替换 '小明'或者'韩小花'的字符
+    var reg = /小明|韩小花/g;
+
+
+	str = str.replace(reg,function(s){
+		console.log(s);
+		return '***';
+	})
+
+	document.write(str);
+</script>
+</head>
+
+<body>
+</body>
+</html>

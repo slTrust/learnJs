@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var str = 'welcome to regexp';
+
+        // console.log(str.indexOf('l'));
+        // console.log(str.indexOf('L'));
+        
+        // console.log(str.search('l'));
+        // console.log(str.search('L'));
+        
+        // var reg = new RegExp('l');
+        var reg = new RegExp('L');
+        console.log(str.search(reg));
+        console.log('``````````````````````````')
+        var reg2 = new RegExp('l');
+        console.log(str.search(reg2));
+        console.log('``````````````````````````')
+        //忽略大小写
+        var reg3 = new RegExp('L','i');
+        console.log(str.search(reg3));
+        console.log('``````````````````````````')
+        var reg4 =/L/i;
+        console.log(str.search(reg4));
+        console.log('``````````````````````````')
+        //找出第一个数字
+        var str = 'sdfsdjksj8769df89ks';
+
+        var reg5 = new RegExp('\\d');
+        
+        console.log(str.search(reg5));
+        console.log('``````````````````````````')
+        var reg6 = /\d/;
+	    console.log(str.search(reg6));
+        console.log('``````````````````````````')
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function domReady(obj,fn){
+            if(obj.addEventListener){
+                obj.addEventListener('DOMContentLoaded',function(){
+                    fn&&fn();	
+                },false);
+            }else{
+                obj.onreadystatechange=function(){
+                    if(obj.readyState=='complete'){
+                        fn&&fn();
+                    }	
+                };
+            }
+        }
+        // 1、当 onload 事件触发时，页面上所有的DOM，样式表，脚本，图片，flash都已经加载完成了。
+        // 2、当 DOMContentLoaded 事件触发时，仅当DOM加载完成，不包括样式表，图片，flash。
+        domReady(document,function(){
+            alert(1);
+        });
+    </script>
+</body>
+</html>
