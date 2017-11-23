@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var str = 'welcome to bei jing';
+
+        var reg = /\w+/g;
+
+        str = str.replace(reg,function(s){
+            // console.log(s);
+            return s.charAt(0).toUpperCase()+s.substring(1);
+        })
+
+        document.write(str);    
+    </script>
+</body>
+</html>
