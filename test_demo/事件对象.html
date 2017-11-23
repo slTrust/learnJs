@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        document.onclick = function(ev){
+            //高版本     ev    参数里的ev 支持  chrom   ie9以上  火狐
+            //低版本推荐 event    支持  chrom ie5以上版本  不支持火狐   
+            var ev = ev||event;
+            alert(ev.clientX);
+        }
+    </script>
+</body>
+</html>

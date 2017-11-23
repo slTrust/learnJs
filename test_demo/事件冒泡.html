@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>bubble</title>
+<style>
+#div1{ width:500px; height:500px; background:red;}
+#div2{ width:300px; height:300px; background:blue;}
+#div3{ width:200px; height:200px; background:yellow; font-size:50px; color:#000;}
+
+#div4{ width:500px; height:500px; background:pink;}
+#div5{ width:300px; height:300px; background:orange;}
+#div6{ width:200px; height:200px; background:#ccc; font-size:50px; color:#000;}
+</style>
+<script>
+window.onload=function(){
+	var oDiv1=document.getElementById('div1');
+	var oDiv2=document.getElementById('div2');
+	var oDiv3=document.getElementById('div3');	
+    var oDiv4=document.getElementById('div4');
+	var oDiv5=document.getElementById('div5');
+	var oDiv6=document.getElementById('div6');	
+	
+	oDiv1.onclick=function(){
+		alert(this.id);	
+	};
+	
+	oDiv2.onclick=function(){
+		alert(this.id);	
+	};
+	
+	oDiv3.onclick=function(){
+		alert(this.id);	
+	};
+
+    //组织冒泡
+    oDiv4.onclick=function(){
+		alert(this.id);	
+	};
+	
+	oDiv5.onclick=function(ev){
+        var ev = ev||event;
+		alert(this.id);	
+        //阻止了事件向上冒泡
+        ev.cancelBubble = true;
+	};
+	//
+	oDiv6.onclick=function(){
+		alert(this.id);	
+	};
+};
+</script>
+</head>
+<body>
+<div id="div1">
+	<div id="div2">
+    	<div id="div3">div3没有阻止冒泡</div>
+    </div>
+</div>
+<div id="div4">
+        <div id="div5">
+            <div id="div6">div6阻止了冒泡</div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
