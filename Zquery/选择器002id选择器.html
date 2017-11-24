@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>思路001 运行不了</title>
+    <title>id选择器</title>
 </head>
 <body>
     <div id="div1" class="red1">
@@ -23,36 +23,28 @@
     </div>
     <div id="div2" class="red"></div>
     <script>
-        
         function getByStr(aParent,str){
-            // aParent => [document] [div,div][ul]
             var aChild = [];
             for(var i=0;i<aParent.length;i++){
                 switch(str.charAt(0)){
                     case '#':
-                        var obj = document.getElementById(str.substring(1));
-                        aChild.push(obj)
+                        aChild.push(document.getElementById(str.substring(1)));
                         break;
                 }
             }
             return aChild;
-        }
-
+        }        
         function getEle(str){
             var arr = str.replace(/^\s+|\s+$/,'').split(/\s+/);
-            //arr = ['div','ul','li']
             var aParent = [document];
             var aChild = [];
-
             for(var i=0;i<arr.length;i++){
                 aChild = getByStr(aParent,arr[i]);
                 aParent = aChild;
             }
-            return aChild ; 
+            return aChild;
         }
 
-
-        //只是思路
         window.onload = function(){
             // var oDiv = getEle('#div1');
             //var aLi = getEle('    div     ul     li    ');

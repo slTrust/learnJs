@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>id选择器</title>
+</head>
+<body>
+    <div id="div1" class="red1">
+        <ul>
+            <li class="red"></li>
+            <li></li>
+            <li class="red"></li>
+            <li></li>
+        </ul>
+        <ol>
+            <li class="red"></li>
+            <li></li>
+            <li class="red"></li>
+            <li></li>
+        </ol>
+    </div>
+    <div id="div2" class="red"></div>
+    <input aaa="123" type="button" value="">
+	<input aaa="123" type="text" name="" id="">
+	<input aaa="123" type="submit" value="提交">
+	<input aaa="123" type="button" value="">
+	<input aaa="123" type="text" name="" id="">
+	<input aaa="123" type="submit" value="提交">
+    <script>
+        function getByClass(aParent,sName){
+            if(aParent.getElementsByClassName){
+                return aParent.getElementsByClassName(sName);
+            }else{
+                var resEle = [];
+                var aEle = document.getElementsByTagName('*');
+                var reg = new RegExp('\\b'+sName+'\\b');
+                for(var i=0;i<aEle.length;i++){
+                    if(reg.test(aEle[i].className)){
+                        resEle.push(aEle[i]);
+                    }
+                }
+                return resEle;
+            }
+        }
+
+
+        function getByStr(aParent,str){
+            var aChild = [];
+            for(var i=0;i<aParent.length;i++){
+                switch(str.charAt(0)){
+                    case '#':
+                        aChild.push(document.getElementById(str.substring(1)));
+                        break;
+                    case '.':
+                        var aEle = getByClass(aParent,str.substring(1));
+                        for(var i=0;i<aEle.length;i++){
+                            aChild.push(aEle[i])
+                        }
+                        break;
+                    default :
+                        //li.red
+                        if(/\w+\.\w+/.test(str)){
+                            var aStr = str.split('.');
+                            var aEle = aParent[i].getElementsByTagName(aStr[0]);
+                            var reg = new RegExp('\\b'+aStr[1]+'\\b');
+                            for(var i=0;i<aEle.length;i++){
+                                if(reg.test(aEle[i].className)){
+                                    aChild.push(aEle[i]);
+                                }
+                            }
+                        }else if(/\w+:\w+(\(\d+\))?/.test(str)){
+                            // li:first  li:last li:eq(1) li:lt(4)
+                            var aStr = str.split(/\:|\(|\)/g);
+                            // [li,first]  
+                            // [li,last]
+                            // [li,eq,1]
+                            // [li,lt,4]
+                            var aEle = aParent[i].getElementsByTagName(aStr[0]);
+                            switch(aStr[1]){
+                                case 'first':
+                                    aChild.push(aEle[0])
+                                    break;
+                                case 'last':
+                                    aChild.push(aEle[aele.length-1]);
+                                    break;
+                                case 'even':
+                                    for(var j=0;j<aEle.length;j+=2){
+                                            aChild.push(aEle[j])
+                                    }
+                                    break;
+                                case 'odd':
+                                    for(var j=1;j<aEle.length;j+=2){
+                                            aChild.push(aEle[j])
+                                    }
+                                    break;
+                                case 'lt':
+                                    for(var j=1;j<aStr[2];j++){
+                                        aChild.push(aEle[j])
+                                    }
+                                    break;
+                                case 'gt':
+                                    for(var j=aStr[2];j<aEle.length;j++){
+                                        aChild.push(aEle[j])
+                                    }
+                                    break;
+                                case 'eq':
+                                    aChild.push(aEle[aStr[2]]);
+                                    break;
+                            }
+                        }else if(/\w+\[\w+=\w+\]/.test(str)){
+                            // input[type=button]
+                            var aStr = str.split(/\[|=|\]/g);
+                            var aEle = aParent[i].getElementsByTagName(aStr[0]);
+                            for(var j=0;j<aEle.length;j++){
+                                if(aEle[j].getAttribute(aStr[1]) == aStr[2]){
+                                    aChild.push(aEle[j]);
+                                }
+                            }
+                        }
+                        break;
+                }
+            }
+            return aChild;
+        }        
+        function getEle(str){
+            var arr = str.replace(/^\s+|\s+$/,'').split(/\s+/);
+            var aParent = [document];
+            var aChild = [];
+            for(var i=0;i<arr.length;i++){
+                aChild = getByStr(aParent,arr[i]);
+                aParent = aChild;
+            }
+            return aChild;
+        }
+
+        window.onload = function(){
+            // var oDiv = getEle('#div1');
+            //var aLi = getEle('    div     ul     li    ');
+            var oDiv = getEle('#div1');
+            console.log(oDiv);
+            
+            // .red
+            var oDiv2 = getEle('.red');
+            console.log(oDiv2)
+
+            // li.red
+            var redLi =getEle('li.red');
+            console.log(redLi)
+
+        }
+    </script>
+    
+</body>
+</html>
