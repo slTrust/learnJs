@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>思路001 运行不了</title>
+</head>
+<body>
+    <div id="div1" class="red1">
+    <ul>
+        <li class="red"></li>
+        <li></li>
+        <li class="red"></li>
+        <li></li>
+    </ul>
+    <ol>
+        <li class="red"></li>
+        <li></li>
+        <li class="red"></li>
+        <li></li>
+    </ol>
+    </div>
+    <div id="div2" class="red"></div>
+    <script>
+        // function getEle(str){
+        //     //step1 去除两边的空格  再用空格截取成数组
+        //     var arr = str.replace(/^\s+|\s+$/g,'').split(/\s+/);
+        //     // arr->['div','ul','li']
+        //     //step2 一层一层过滤  定义父级元素 子元素 
+        //     var aParent = [document];
+        //     var aChild = [];
+        //     // arr->['div','ul','li']
+        //     for(var i=0; i<arr.length; i++){
+        //         aChild = getByStr(aParent,arr[i]);
+        //         aParent = aChild;
+        //         /*
+        //             0
+        //             getByStr(document,div)
+        //             aParent -> div
+        
+        //             1
+        //             getByStr(div,ul)
+        //             aParent -> ul
+        
+        //             2
+        //             getByStr(ul,li)
+                    
+        //         */
+        //     }
+        
+        //     return aChild;
+        // }
+            //  div   ul  li
+        function getEle(str){
+            var arr = str.replace(/^\s+|\s+$/,'').split(/\s+/);
+            //arr = ['div','ul','li']
+            var aParent = [document];
+            var aChild = [];
+
+            for(var i=0;i<arr.length;i++){
+                aChild = getByStr(aParent,arr[i]);
+                aParent = aChild;
+
+                /*
+                i=0
+                aChild = getByStr(document,div)  div
+                aParent = div
+
+                i=1
+                aChild = getByStr(div,ul)  ul
+                aParent = ul
+
+                i=2
+                aChild = getByStr(ul,li)  li
+                aParent = li
+                
+                
+                */
+            }
+            return aChild ; 
+        }
+
+
+        //只是思路
+        window.onload = function(){
+            // var oDiv = getEle('#div1');
+            var aLi = getEle('    div     ul     li    ');
+        }
+    </script>
+    
+</body>
+</html>
