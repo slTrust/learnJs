@@ -40,12 +40,14 @@ var echarts = require('echarts');
 
 
 /*
- * 全局地图对象，用以坐标定位
+ * 全局地图对象，用以坐标定位 
+ * 这个没法一起打包因为他是百度借口的必须走https协议
  */
 var mapObj = new BMap.Map("oBox");
+//搜索模块的api对象
 var localSearch = new BMap.LocalSearch(mapObj);
 /*
- * 在省级地图中 根据市、区名称，获取该地区中心点的经纬度
+ * baidumapAPI 在省级地图中 根据市、区名称，获取该地区中心点的经纬度
  */
 function searchByStationName(cityName,fnCallBack) {
 	var res=[];
@@ -89,11 +91,7 @@ function initChinaMap(chinaData){
 	// 基于准备好的dom，初始化echarts实例
 	var mapChina = echarts.init(document.getElementById('SuperChart'));
 	var option = {
-			/*  title: {
-		            text: 'aaa',
-		            subtext: '',
-		            left: 'center'
-		        }, */
+			
 	        tooltip: {
 	            trigger: 'item',
 	            formatter: function (params, ticket, callback) {
@@ -394,10 +392,11 @@ function showCity(city) {
 	    		currentCity = params.name;
 	    	}else{
 	    		isSameCity = true;
-	    		if(currentCity == params.name){
+				if(currentCity == params.name){
 	    			isSameCity = true;
 	    		}else{
-	    			isSameCity = false;
+		//搜索模块的api对象
+					isSameCity = false;
 	    		}
 	    		currentCity =params.name;
 	    	}
