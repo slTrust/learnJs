@@ -39,6 +39,7 @@ import '../node_modules/echarts/map/js/province/hebei.js';
 var echarts = require('echarts');
 
 
+
 /*
  * 全局地图对象，用以坐标定位 
  * 这个没法一起打包因为他是百度借口的必须走https协议
