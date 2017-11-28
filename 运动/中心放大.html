@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0;}
+        li{list-style: none;}
+        #box{
+            margin:100px auto;
+            height: 366px;
+            width: 366px;
+            background: -pink;
+        }
+        #box li{
+            height: 100px;
+            width: 100px;
+            margin:10px;
+            float:left;
+            border:1px solid #000;
+            background: #ccc;
+        }
+        clearfix::after{
+            display: block;
+            content:'';
+            clear:both;
+        }
+    </style>
+</head>
+<body>
+        <ul id="box" class="clearfix">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    <script src="./move.js"></script>
+    <script>
+        window.onload = function(){
+            var aLi = document.getElementById('box').children;
+            var Pos = [];
+            //**转变布局
+            for(var i=0;i<aLi.length;i++){
+                Pos[i]={
+                    left:aLi[i].offsetLeft,
+                    top:aLi[i].offsetTop
+                }
+            }
+
+            for(var i=0;i<Pos.length;i++){
+                var eleStyle = aLi[i].style;
+                eleStyle.position = 'absolute';
+                eleStyle.left = Pos[i].left + 'px';
+                eleStyle.top = Pos[i].top + 'px';
+                eleStyle.margin = 0;
+                eleStyle.background ='#f'+i+i;
+            }
+
+            for(var i=0;i<aLi.length;i++){
+                aLi[i].index = i;
+                aLi[i].onmouseover = function(){
+                    move(this,{width:200,height:200,marginLeft:-50,marginTop:-50})
+                    this.style.zIndex = 999;
+                }
+                aLi[i].onmouseout = function(){
+                    move(this,{width:100,height:100,marginLeft:0,marginTop:0})
+                    this.style.zIndex = 1;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

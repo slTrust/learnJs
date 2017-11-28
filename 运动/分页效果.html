@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0;}
+        li{list-style: none;}
+        #box{
+            margin:100px auto;
+            height: 366px;
+            width: 366px;
+            background: -pink;
+        }
+        #box li{
+            height: 100px;
+            width: 100px;
+            margin:10px;
+            float:left;
+            border:1px solid #000;
+            background: #ccc;
+        }
+        clearfix::after{
+            display: block;
+            content:'';
+            clear:both;
+        }
+    </style>
+</head>
+<body>
+        <ul id="box" class="clearfix">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <button id="btn">按钮</button>
+    <script src="./move.js"></script>
+    <script>
+        window.onload = function(){
+            var aLi = document.getElementById('box').children;
+            var oBtn = document.getElementById('btn');
+            var flag = true;
+            var Pos = null;
+            Pos = initPosition(aLi);
+            listenToMouse(aLi);
+
+            oBtn.onclick = function(){
+                if(flag){
+                    contentHide(aLi);
+                }else{
+                    contentShow(aLi,Pos);
+                }
+
+                flag = !flag;
+            }
+
+        }
+
+        function contentHide(aEle){
+            var i=0;
+            var timer = null;
+            timer = setInterval(function(){
+                (function(index){
+                    move(aEle[index],{'width':0,height:0,left:0,top:0})
+                })(i);
+                i++;
+                if(i==aEle.length){
+                    clearInterval(timer);
+                }
+            },100)
+        }
+
+        function contentShow(aEle,pos){
+            var i=0;
+            var timer = null;
+            timer = setInterval(function(){
+                (function(index){
+                    move(aEle[index],{'width':100,height:100,left:pos[index].left,top:pos[index].top})
+                })(i);
+                i++;
+                if(i==aEle.length){
+                    clearInterval(timer);
+                }
+            },100)
+        }
+
+
+        function listenToMouse(aEle){
+            for(var i=0;i<aEle.length;i++){
+                aEle[i].index = i;
+                aEle[i].onmouseover = function(){
+                    move(this,{width:200,height:200,marginLeft:-50,marginTop:-50})
+                    this.style.zIndex = 999;
+                }
+                aEle[i].onmouseout = function(){
+                    move(this,{width:100,height:100,marginLeft:0,marginTop:0})
+                    this.style.zIndex = 1;
+                }
+            }
+        }
+
+        function initPosition(aElem){
+            var Pos = [];
+            //**转变布局
+            for(var i=0;i<aElem.length;i++){
+                Pos[i]={
+                    left:aElem[i].offsetLeft,
+                    top:aElem[i].offsetTop
+                }
+            }
+
+            for(var i=0;i<Pos.length;i++){
+                var eleStyle = aElem[i].style;
+                eleStyle.position = 'absolute';
+                eleStyle.left = Pos[i].left + 'px';
+                eleStyle.top = Pos[i].top + 'px';
+                eleStyle.margin = 0;
+                eleStyle.background ='#f'+i+i;
+            }
+            return Pos;
+        }
+    </script>
+</body>
+</html>
