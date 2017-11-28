@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0;}
+        #div1{
+            height: 100px;
+            width: 100px;
+            background: #ccc;
+            position: absolute;
+            left:0;
+            top:0;
+        }
+        #end{
+            position: absolute;
+            left:500px;
+            top:0;
+            height: 100px;
+            width: 20px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <div id="end">end</div>
+    <script>
+        window.onload = function(){
+            var oDiv = document.getElementById('div1');
+            var timer = null;
+            document.onclick = function(){
+                
+                move(oDiv,'opacity',0.2);
+               
+            }
+        }
+
+        function getStyle(obj,name){
+            return (obj.currentStyle||getComputedStyle(obj,false))[name];
+        }
+
+        function move(ele,name,iTarget){
+            //起点
+            var start = parseFloat(getStyle(ele,name));
+            
+            //目标值 iTarget
+            //实际距离
+            var dis = iTarget - start;
+            //执行次数  =  总时间/30帧
+            var count = Math.floor(200/30);
+            //幅度  每次走多少
+            var rate = dis/count;
+            //计数器
+            var n =0;
+
+            timer = setInterval(function(){
+                n++;
+                var cur = start+n*rate;
+                if(name==='opacity'){
+                    ele.style[name] = cur;
+                }else{
+                    ele.style[name] = cur +"px";
+                }
+                if(n==count){
+                    clearInterval(timer);
+                }
+
+            },30)
+            return ele;
+        }
+    </script>
+</body>
+</html>
