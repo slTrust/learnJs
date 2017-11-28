@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            height: 300px;
+            width: 0px;
+            background: pink;
+            position: absolute;
+            right:0;
+            top:50%;
+        }
+        #box span{
+            font-size: 20px;
+            text-align: center;
+            position: absolute;
+            left:-30px;
+            top:100px;
+            width:30px;
+            height: 100px;
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <span>分享到</span>
+    </div>
+    <script src="./move.js"></script>
+    <script>
+        window.onload = function(){
+            var oDiv = document.getElementById('box');
+
+            oDiv.onmouseover = function(){
+                move(this,{'width':100});
+            }
+            oDiv.onmouseout = function(){
+                move(this,{'width':0});
+            }
+
+        }
+    </script>
+</body>
+</html>
