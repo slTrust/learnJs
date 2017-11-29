@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        span{
+            font-size: 50px;
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <script src="./move.js"></script>
+    <script>
+        window.onload = function(){
+            var str ='英锦赛的举办地约克郡巴比肯中心，算得上是丁俊晖职业生涯的福地，2005年，18岁的他在这里击败老球王史蒂夫·戴维斯首夺英锦赛冠军；4年后，他再次在决赛中击败希金斯夺冠，这也是他职业生涯份量最重的两个排名赛冠军。然而从那以后的8年来，福地运气不再，最好的战绩仅为2011年的1/4决赛，其中3次一轮游，包括北京时间今天凌晨5比6输给世界排名第130位的爱尔兰选手里奥·费尔南德斯。';
+            //根据字数 创建span标签
+            initView(str)
+            
+            var aSpan = document.getElementsByTagName('span');
+            var i = 0;
+            var timer = null;
+            timer = setInterval(function(){
+                if(i==aSpan.length){
+                    clearInterval(timer);
+                }
+                move(aSpan[i],{opacity:1});
+                i++;
+            },100)
+        }
+
+        function initView(str){
+            var oDiv = document.createElement('div');
+            for(var i=0;i<str.length;i++){
+                var oSpan = document.createElement('span');
+                oSpan.textContent = str[i];
+                oSpan.style.opacity = 0;
+                oDiv.appendChild(oSpan);
+            }
+            document.body.appendChild(oDiv);
+        }
+    </script>
+</body>
+</html>
