@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            height: 400px;
+            width: 700px;
+            margin:100px auto;
+            border:1px solid #ccc;
+            background:url('./img/pic000.png') no-repeat;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+    </div>
+    <button id="btn">走着</button>
+    <script src="./move.js"></script>
+    <script>
+        window.onload = function(){
+            var oDiv = document.getElementById('box');
+            var oBtn = document.getElementById('btn');
+            initLayout(oDiv);
+
+            var i = 0;
+            var aSpan = oDiv.children;
+            
+            var flag = true;
+            oBtn.onclick = function(){
+                if(!flag) return;
+                flag = false;
+                
+                i++;
+                var timer = null;
+                var n = 0;
+                
+                timer = setInterval(function(){
+                    aSpan[n].style.backgroundImage = "url('./img/pic00"+i%3+".png')";
+                    aSpan[n].style.opacity = '0';
+                    move(aSpan[n],{opacity:1})
+                    n++;
+                    if(n==aSpan.length){
+                        clearInterval(timer);
+                        flag = true;
+                        oDiv.style.backgroundImage = "url('./img/pic00"+i%3+".png')";
+                    }
+                },100)
+    
+
+            }
+
+
+        }
+        //将div内填充span
+        function initLayout(container){
+            // div 宽700 高 400  ==》100*100的span 所以  4行七列
+            var row = 4;
+            var col = 7;
+            var w = 100;
+            var h = 100;
+            for(var i=0;i<row;i++){
+                for(var j=0;j<col;j++){
+                    var oSpan = createSpan();
+                    var oSpanStyle =  oSpan.style;
+                    oSpanStyle.position = 'absolute';
+                    oSpanStyle.height = h +'px';
+                    oSpanStyle.width = w +'px';
+                    oSpanStyle.left = j*w+'px';
+                    oSpanStyle.top = i*h+'px';
+                    oSpanStyle.opacity = 0;
+                    oSpanStyle.background = "url('./img/pic001.png') no-repeat";
+                    oSpanStyle.backgroundPosition = -j*w+'px  '+(-i*h)+'px';
+
+                    container.appendChild(oSpan);
+                }
+            }
+        }
+
+        function createSpan(){
+            var oSpan = document.createElement('span');
+            return oSpan;
+        }
+    </script>
+</body>
+</html>

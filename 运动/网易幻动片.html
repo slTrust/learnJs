@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+*{ margin:0; padding:0; list-style:none;}
+div{ width:500px; height:300px; position:relative; margin:50px auto; overflow:hidden;}
+ul{ position:absolute; left:0; top:0; width:500px; height:300px;}
+ul li{ width:500px; height:100%; font-size:200px; color:#fff; text-align:center; line-height:300px; float:left;}
+ol{ position:absolute; left:14%; bottom:14px;}
+ol li{ width:70px; height:20px; background:#000; float:left; margin:10px; position:relative;}
+ol li span{ position:absolute; left:0; top:0; width:0; height:100%; background:pink;}
+</style>
+<script src="move.js"></script>
+<script>
+window.onload=function(){
+	var oBox=document.getElementById('box');
+	var oUl=oBox.children[0];
+	var aLi=oUl.children;
+	var aSpan=document.getElementsByTagName('span');
+	oUl.style.width=aLi[0].offsetWidth*aLi.length+'px';
+	
+	var i=0;
+	function next(){
+		move(aSpan[i],{width:70},{complete:function(){
+			//alert(aSpan[i].offsetWidth);
+			aSpan[i].style.width=0;
+			
+			i++;
+			if(i==aLi.length){
+				i=0;
+			}
+			move(oUl,{left:-i*aLi[0].offsetWidth},{complete:function(){
+				next();	
+			}});	
+		}});	
+	}
+	next();
+};
+</script>
+</head>
+<body>
+<div id="box">
+	<ul>
+    	<li style="background:#FF9">0</li>
+    	<li style="background:#0CF">1</li>
+    	<li style="background:#6C3">2</li>
+    	<li style="background:#F36">3</li>
+    </ul>
+    <ol>
+    	<li><span></span></li>
+    	<li><span></span></li>
+    	<li><span></span></li>
+    	<li><span></span></li>
+    </ol>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
