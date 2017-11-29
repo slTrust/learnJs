@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0;list-style: none;}
+        #box{
+            position: relative;
+            margin:100px auto;
+            width:600px;
+            height: 220px;
+            border:2px solid #ccc;
+            overflow: hidden;
+        }
+        ul{
+            position: absolute;
+            left:0;
+            top:0;
+        }
+        li{
+            float:left;
+            padding:10px;
+            overflow:hidden;
+            height: 200px;
+            width: 130px;
+        }
+        li>img{
+            height: 200px;
+            width: 130px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <ul id="ul">
+            <li><img src="./img/a01.jpg" alt=""></li>
+            <li><img src="./img/a02.jpg" alt=""></li>
+            <li><img src="./img/a03.jpg" alt=""></li>
+            <li><img src="./img/a04.jpg" alt=""></li>
+        </ul>
+    </div>
+    <script>
+        window.onload = function(){
+            var oUl = document.getElementById('ul');
+
+            initLayout(oUl);
+
+            play(oUl);
+            //play2(oUl);
+           
+        }
+
+        function initLayout (container){
+            //将内容复制一份添加到ul中
+            container.innerHTML +=container.innerHTML;
+            //设置宽度  为li宽度*个数
+            var count = container.children.length;
+            var oLi_Width = container.children[0].offsetWidth;
+            container.style.width = oLi_Width*count+'px';
+        }
+        //左滚动
+        function play(container){
+            var W = container.offsetWidth/2;
+            var n = 0;
+            
+            setInterval(function(){
+                n-=5;
+                if(n<=-W){
+                    n=0;
+                }
+                container.style.left = n+'px';
+            },30)
+        }
+        //右滚动
+        function play2(container){
+            var W = container.offsetWidth/2;
+            var n = 0;
+            setInterval(function(){
+                n+=5;
+                if(n>0){
+                    n=-W;
+                }
+                container.style.left = n+'px';
+            },30)
+        }
+    </script>
+</body>
+</html>
