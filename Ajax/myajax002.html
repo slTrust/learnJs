@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="getData" id="btn"> 
+    <br>
+    <input type="text" id="user">
+    <input type="button" value="get" id="btnGet">
+    <br>
+    <input type="text" id="user2">
+    <input type="button" value="post" id="btnPost">
+    <script>
+        //提取参数   
+        function ajax(url,data,type,success,error){
+            var httpRequest = null;
+            if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+                httpRequest = new XMLHttpRequest();
+            } else if (window.ActiveXObject) { // IE 6 and older
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            switch(type){
+                case 'GET':
+                    httpRequest.open('GET',url+'?'+json2str(data),true);
+                    httpRequest.send();
+                    break;
+                case 'POST':
+                    httpRequest.open('POST',url,true);
+                    httpRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+                    httpRequest.send(json2str(data));
+                    break;
+            }
+
+            httpRequest.onreadystatechange = function(){
+                if (httpRequest.readyState === 4) {
+                    if (httpRequest.status === 200) {
+                        success&&success(httpRequest.responseText);
+                    } else {
+                        error&&error(httpRequest.status);
+                    }
+                }
+            }
+        }    
+
+      
+        btn.onclick = function(){
+            ajax('./1.txt',{},'GET',function(data){
+                alert(data)
+            },function(err){
+                alert(err)
+            })
+        }
+
+        btnGet.onclick = function(){
+            ajax('./my_get001.php',{user:user.value},'GET',function(data){
+                alert(data)
+            },function(err){
+                alert(err)
+            });
+        }
+
+        btnPost.onclick = function(){
+            ajax('./my_post001.php',{user:user2.value},'POST',function(data){
+                alert(data)
+            },function(err){
+                alert(err)
+            });
+        }
+
+
+        function json2str(json){
+            json.t = Math.random();
+            var arr = [];
+            for(var name in json){
+                arr.push(name+'='+json[name]);
+            }
+            var str = arr.join('&');
+            return str;
+        }
+    </script>
+</body>
+</html>

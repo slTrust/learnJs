@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #loading{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <input type="text" id="user">
+    <input type="button" value="post" id="btnPost">
+    <div id="loading">
+        <img src="./roller.gif" alt="">
+    </div>
+    <script>
+        //提取参数   url,data,type,success,error,time,fnLoading,fnTimter
+        function ajax(json){
+            json = json||{};
+            if(!json.url){ return {msg:'啥都没有  你搞啥！'}; }
+            
+            json.data = json.data||{};
+            json.type = json.type||'GET';
+            json.time = json.time||3000;
+
+            var httpRequest = null;
+            if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+                httpRequest = new XMLHttpRequest();
+            } else if (window.ActiveXObject) { // IE 6 and older
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            switch(json.type.toUpperCase()){
+                case 'GET':
+                    httpRequest.open('GET',json.url+'?'+json2str(json.data),true);
+                    httpRequest.send();
+                    break;
+                case 'POST':
+                    httpRequest.open('POST',json.url,true);
+                    httpRequest.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+                    httpRequest.send(json2str(json.data));
+                    break;
+            }
+            //等待结果时的处理
+            json.fnLoading && json.fnLoading();
+            
+            httpRequest.onreadystatechange = function(){
+                if (httpRequest.readyState === 4) {
+                    if (httpRequest.status >= 200&&httpRequest.status<300||httpRequest.status === 304) {
+                        json.success&&json.success(httpRequest.responseText);
+                    } else {
+                        json.error&&json.error(httpRequest.status);
+                    }
+                }
+                clearTimeout(timer);
+            }
+
+            var timer = null;
+            timer = setTimeout(function(){
+                console.log('clear')
+                httpRequest.onreadystatechange = null;
+                json.fnTimter && json.fnTimter();
+            },json.time)
+        }    
+
+      
+       
+
+        btnPost.onclick = function(){
+            ajax({
+                url:'./my_post_sleep.php',
+                data:{user:user.value},
+                type:'POST',
+                success:function(data){
+                    alert(data)
+                },
+                error:function(err){
+                    alert(err)
+                },
+                //请求等待期间的处理  显示加载中
+                fnLoading:function(){
+				    loading.style.display = 'block';
+                },
+                //最大超时时间
+                time:5000,
+                //超时后的处理
+                fnTimter:function(){
+                    alert('服务器未响应，请重新请求')
+                    loading.style.display = 'none';
+                }
+            });
+        }
+
+
+        function json2str(json){
+            json.t = Math.random();
+            var arr = [];
+            for(var name in json){
+                arr.push(name+'='+json[name]);
+            }
+            var str = arr.join('&');
+            return str;
+        }
+    </script>
+</body>
+</html>

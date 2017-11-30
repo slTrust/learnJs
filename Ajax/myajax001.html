@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="getData" id="btn"> 
+    <br>
+    <input type="text" id="user">
+    <input type="button" value="get" id="btnGet">
+    <br>
+    <input type="text" id="user2">
+    <input type="button" value="post" id="btnPost">
+    <script>
+       function ajax(url){
+            var httpRequest = null;
+            if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+                httpRequest = new XMLHttpRequest();
+            } else if (window.ActiveXObject) { // IE 6 and older
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            httpRequest.open('GET',url, true);
+            httpRequest.send();
+
+            httpRequest.onreadystatechange = function(){
+                console.log(httpRequest.readyState)
+                if (httpRequest.readyState === 4) {
+                    if (httpRequest.status === 200) {
+                        alert(httpRequest.responseText);
+                    } else {
+                        alert('There was a problem with the request.');
+                    }
+                }
+            }
+        }    
+
+        function ajax2(url,data){
+            var httpRequest = null;
+            if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+                httpRequest = new XMLHttpRequest();
+            } else if (window.ActiveXObject) { // IE 6 and older
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            
+            httpRequest.open('GET',url+'?'+json2str(data),true);
+            httpRequest.send();
+
+            httpRequest.onreadystatechange = function(){
+                if (httpRequest.readyState === 4) {
+                    if (httpRequest.status === 200) {
+                        alert(httpRequest.responseText);
+                    } else {
+                        console.log(httpRequest)
+                        alert('There was a problem with the request.');
+                    }
+                }
+            }
+        }    
+
+        function ajax3(url,data){
+            var httpRequest = null;
+            if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+                httpRequest = new XMLHttpRequest();
+            } else if (window.ActiveXObject) { // IE 6 and older
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            
+            httpRequest.open('POST',url,true);
+            httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            httpRequest.send(json2str(data));
+
+            httpRequest.onreadystatechange = function(){
+                if (httpRequest.readyState === 4) {
+                    if (httpRequest.status === 200) {
+                        alert(httpRequest.responseText);
+                    } else {
+                        console.log(httpRequest)
+                        alert('There was a problem with the request.');
+                    }
+                }
+            }
+        }    
+        
+        btn.onclick = function(){
+            ajax('./1.txt')
+        }
+
+        btnGet.onclick = function(){
+            ajax2('./my_get001.php',{user:user.value});
+        }
+
+        btnPost.onclick = function(){
+            ajax3('./my_post001.php',{user:user2.value});
+        }
+
+
+        function json2str(json){
+            json.t = Math.random();
+            var arr = [];
+            for(var name in json){
+                arr.push(name+'='+json[name]);
+            }
+            var str = arr.join('&');
+            return str;
+        }
+    </script>
+</body>
+</html>
