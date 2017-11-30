@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    body{
+		padding:100px;
+	}
+	*{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	ul{
+		margin-top: 10px;
+	}
+	li{
+		overflow: hidden;
+		width:380px;
+		line-height: 30px;
+		border-bottom: 1px dashed #ccc;
+	}
+	li a{
+		float: left;
+	}
+	li span{
+		float: right;
+	}
+    </style>
+</head>
+<body>
+    <input type="button" value="随机换一换" id="btn">
+	<ul id="ul1">
+		
+    </ul>
+    <script src="./ajax001.js"></script>
+    <script>
+        window.onload = function(){
+            var oBtn = document.getElementById('btn');
+            var oUl = document.getElementById('ul1');
+            oBtn.onclick = function(){
+                ajax('./weibo.data?t='+Math.random(),function(res){
+                        var arr = new Function('return  '+ res)();
+                        oUl.innerHTML = '';
+                        for(var i=0; i<4; i++){
+                            var oLi = document.createElement('li');
+                            oLi.innerHTML = '<a href="'+arr[i].href+'">'+arr[i].title+'</a><span>'+arr[i].num+'</span>';
+                            oUl.appendChild(oLi);
+                        }
+                    },function(err){
+
+                    }
+                )
+            }
+        }
+    </script>
+</body>
+</html>
