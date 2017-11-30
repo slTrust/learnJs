@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="oT">
+    <script>
+        //这是百度搜索接口
+        var url = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=2&json=1&p=3&sid=1443_21117_17001_25177_20718&req=2&csor=1&cb=jQuery110209018911215677279_1512028725377&_=1512028725382';
+        //需要处理不需要的东西
+        url = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=2&cb=fasfsad';
+        // cb ==> 回调方法名
+        url = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su';
+        
+
+        oT.onkeyup = function(){
+            var val = oT.value;
+            jsonp(url+'?wd='+val+'&cb=show');    
+        }
+
+        function jsonp(url){
+            window.show = function(json){
+                console.log(json.s);
+            }
+            var oS = document.createElement('script');
+            oS.src = url;
+            var oHead = document.getElementsByTagName('head')[0];
+            oHead.appendChild(oS);
+        }
+
+        
+
+    </script>
+</body>
+</html>

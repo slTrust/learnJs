@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="oT">
+    <script>
+        //这是百度搜索接口
+        var url = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=2&json=1&p=3&sid=1443_21117_17001_25177_20718&req=2&csor=1&cb=jQuery110209018911215677279_1512028725377&_=1512028725382';
+        //需要处理不需要的东西
+        url = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=2&cb=fasfsad';
+        // cb ==> 回调方法名
+        url = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su';
+        
+
+        oT.onkeyup = function(){
+            var val = oT.value;
+            jsonp({
+                url:url,
+                cbName:'cb',
+                data:{wd:val},
+                success:function(data){
+                    console.log(data.s);
+                }
+            });
+
+        }
+        function jsonToStr(json){
+            var arr = [];
+            for(var name in json){
+                arr.push(name+'='+json[name]);
+            }
+            var str = arr.join('&');
+            return str;
+        }
+        //url,data,cbName,success
+        function jsonp(json){
+            json = json||{};
+            if(!json.url){
+                alert('你得告诉我你跨域的接口吧！')
+                return ;
+            }
+            json.data = json.data||{};
+            json.cbName = json.cbName||'cb';
+
+            //每次都生产新的函数名
+            var fnName = 'show'+Math.random();
+            fnName = fnName.replace('.','');
+            json.data[json.cbName] = fnName;
+            window[fnName] = function(res){
+                json.success&&json.success(res);
+                //成功之后删除创建的script标签
+                oH.removeChild(oS);
+            }
+            var oS = document.createElement('script');
+            oS.src = json.url+'?'+jsonToStr(json.data);
+            var oH = document.getElementsByTagName('head')[0];
+            oH.appendChild(oS);
+        }
+
+        
+
+    </script>
+</body>
+</html>
