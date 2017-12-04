@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Person(name,age){
+            this.name=name;
+            this.age=age;
+        }
+        Person.prototype.showName=function(){
+            return this.name;
+        };
+        Person.prototype.showAge=function(){
+            return this.age;
+        };
+
+        //继承
+        function Worker(name,age,job){
+            Person.apply(this,arguments);
+        }
+        Worker.prototype=new Person();
+        Worker.prototype.constructor=Worker;
+
+        var p1=new Person('aaa',30);
+        var w1=new Worker('bbb',10,'上学');
+
+//        alert(p1.showName());
+        alert(w1.showName());
+    </script>
+</head>
+<body>
+</body>
+</html>
