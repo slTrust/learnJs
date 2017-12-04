@@ -9,18 +9,21 @@
 <body>
     <script>
         var a=12;
-        var b=5;
 
         /*var json={
-            a:a,
-            b:b
+            a,
+            show:function(){
+                alert(1);
+            }
         };*/
         var json={
-            a,  //  a:a
-            b   //  b:b
+            a,
+            show(){
+                alert(1);
+            }
         };
 
-        alert(json.a);
+        json.show();
     </script>
 </head>
 <body>
