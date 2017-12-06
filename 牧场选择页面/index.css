@@ -1,0 +1,83 @@
+*{margin:0;padding:0;}
+ul,ol{list-style: none;}
+#content .check_paddock{
+    font-size:18px;
+    color:#fff;
+    text-align:center;
+    margin:0px;
+    padding-top:80px;
+    padding-bottom:64px;
+}
+#content ul{
+    padding:0;
+    text-align:center;
+}
+#content ul li{
+    width:346px;
+    padding:24px 0 40px;
+    margin:0 auto;
+    margin-bottom:18px;
+    font-size:24px;
+    font-weight:bold;
+    color:#0078C5;
+    background:transparent url(./images/small_board_1.png) no-repeat center center;
+      position:relative;
+      
+}
+#content ul li span{
+    display:block;
+    margin-left:32px;
+    max-width:258px;
+    position:relative;
+}
+#content ul li span .arrows{
+    position:absolute;
+    height:36px;
+    width:24px;
+    right:-24px;
+    top:calc(50% - 16px);
+    background:transparent url(./images/check.png) no-repeat center center;
+}
+
+#content ul li:hover span .arrows{
+    background-image:url(./images/check_active.png);
+}
+
+#content ul li span table{border-collapse:collapse;}
+#content ul li span table td{
+    padding:0;
+    text-align:left;
+    vertical-align:middle;
+}
+#content ul li img{
+    float:right;
+}
+.paddock{
+    display:none;
+}
+
+#container{
+    background: #fff url(./images/index_selectfarm_bg.png) no-repeat center center;
+      background-size: cover; 
+      
+} 
+.farmBox{
+    position:relative;
+    overflow:hidden;
+    margin-top:40px;
+}
+.farmBox ul{
+    position:absolute;
+    top:0px;
+    left:calc(50% - 173px);
+    z-index:2;
+}
+/* 木棍 */
+.farmStick{
+    position:absolute;
+    width:50px;
+    bottom:0;
+    left:calc(50% - 25px);
+    background:url(./images/pole_tall.png) repeat-y top center;
+    
+}
