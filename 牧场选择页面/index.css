@@ -57,8 +57,9 @@ ul,ol{list-style: none;}
 }
 
 #container{
-    background: #fff url(./images/index_selectfarm_bg.png) no-repeat center center;
-      background-size: cover; 
+    background: #fff url(./images/index_selectfarm_bg.png) no-repeat center bottom;
+    /* bottom保证了草坪始终在下面 */
+    background-size: cover; 
       
 } 
 .farmBox{
