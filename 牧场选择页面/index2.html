@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./index2.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container" style="overflow:hidden">
+        <div id="content">
+            <div class="check_paddock">选择登录牧场</div>
+            <div class="farmStick"></div>
+            <div class="farmBox">
+                <ul>
+                   
+                    <li class="lenght_li">
+                        <div class="cf">
+                            <span class="paddock_length">
+                                <table><tbody><tr><td>牧场001</td></tr></tbody></table>
+                                <div class="arrows"></div>
+                            </span>
+                        </div>
+                    </li> 
+                    <li class="lenght_li">
+                        <div class="cf">
+                            <span class="paddock_length">
+                                <table><tbody><tr><td>牧场002</td></tr></tbody></table>
+                                <div class="arrows"></div>
+                            </span>
+                        </div>
+                    </li> 
+                    <li class="lenght_li">
+                        <div class="cf">
+                            <span class="paddock_length">
+                                <table><tbody><tr><td>牧场005 牧场牧场牧场  测试牧场</td></tr></tbody></table>
+                                <div class="arrows"></div>
+                            </span>
+                        </div>
+                    </li> 
+                    <li class="lenght_li">
+                        <div class="cf">
+                            <span class="paddock_length">
+                                <table><tbody><tr><td>牧场000 牧场牧场牧场  测试牧场</td></tr></tbody></table>
+                                <div class="arrows"></div>
+                            </span>
+                        </div>
+                    </li> 
+                    <li class="lenght_li">
+                        <div class="cf">
+                            <span class="paddock_length">
+                                <table><tbody><tr><td>牧场003</td></tr></tbody></table>
+                                <div class="arrows"></div>
+                            </span>
+                        </div>
+                    </li> 
+                    <li class="lenght_li">
+                        <div class="cf">
+                            <span class="paddock_length">
+                                <table><tbody><tr><td>牧场004</td></tr></tbody></table>
+                                <div class="arrows"></div>
+                            </span>
+                        </div>
+                    </li> 
+                    <li class="lenght_li">
+                        <div class="cf">
+                            <span class="paddock_length">
+                                <table><tbody><tr><td>牧场005 牧场牧场牧场  测试牧场</td></tr></tbody></table>
+                                <div class="arrows"></div>
+                            </span>
+                        </div>
+                    </li> 
+                    <li class="lenght_li">
+                        <div class="cf">
+                            <span class="paddock_length">
+                                <table><tbody><tr><td>牧场000 牧场牧场牧场  测试牧场</td></tr></tbody></table>
+                                <div class="arrows"></div>
+                            </span>
+                        </div>
+                    </li> 
+                </ul>
+            </div>
+        </div>
+        <img alt="" src="images2/index_selectfarm_bg.png?t=171207" style="display:none;">
+    </div>
+<script src="./jquery-3.1.1.js"></script>
+<script type="text/javascript">
+        
+$(function(){
+	//设置各容器高度
+	setEleHeight();
+	//监听滚轮事件
+	listenToMouseWheel();
+	//初始化牧场设置的木板
+	initList($('#container .farmBox ul li'));
+	//监听牧场悬停点击效果
+	listenToFarmActive($('#container .farmBox ul li'))
+})
+	
+window.onresize = function(){
+	setEleHeight();
+}
+//初始化木条 传递li元素
+function initList(arrLi){
+	arrLi.each(function(i,v){
+		var offsetH = this.offsetHeight;
+		if(offsetH>100){
+			//折行的
+			this.style.backgroundPosition ='0px '+(-700-(i%6)*134)+'px';
+			this.style.paddingBottom = '38px';
+		}else{
+			//单行的
+			this.style.backgroundPosition ='0px '+(-i%6)*100+'px'; 
+		}
+	})
+}
+
+function listenToFarmActive(arrLi){
+	arrLi.each(function(i,v){
+		//移入
+		$(this).on('mouseenter',function(){
+			var imgPos = this.style.backgroundPosition;
+			var pos = imgPos.split(' ')
+			if(pos[0]==='0px'){
+				this.style.backgroundPosition = '-361px '+pos[1];
+			}
+			
+			this.style.color = '#0078c5';
+			var arrows = $(this).find('.arrows')[0] ;
+			arrows.style.backgroundImage = 'url(./images2/check_active.png?t=171207)';
+		})
+		//移出
+		$(this).on('mouseleave',function(){
+			var imgPos = this.style.backgroundPosition;
+			var pos = imgPos.split(' ')
+			if(pos[0]==='-361px'){
+				this.style.backgroundPosition = '0px '+pos[1];
+			}
+			
+			this.style.color = '#444444';
+			var arrows = $(this).find('.arrows')[0] ;
+			arrows.style.backgroundImage = 'url(./images2/check.png?t=171207)';
+		})
+		//按下
+		$(this).on('mousedown',function(){
+
+		})
+		//抬手
+		$(this).on('mouseup',function(){
+			var imgPos = this.style.backgroundPosition;
+			var pos = imgPos.split(' ');
+			if(pos[0]==='-361px'){
+				this.style.backgroundPosition = '0px '+pos[1];
+			}
+			this.style.color = '#444444';
+			var arrows = $(this).find('.arrows')[0] ;
+			arrows.style.backgroundImage = 'url(./images2/check.png?t=171207)';
+		})
+	})
+}
+
+//计算设置各容器高度
+function setEleHeight(){
+	var clientH =  $(window).height();
+	$('#container').css('height',clientH);
+	$('#container .farmBox').css('height',clientH-171-80);
+	$('#container .farmStick').css('height',clientH-171);
+	$('#container').css('background','#fff url(./images2/index_selectfarm_bg.png?t=171207) no-repeat center bottom');
+}
+
+//监听滚轮事件
+function listenToMouseWheel(){
+	$('#container .farmBox').on("mousewheel DOMMouseScroll", function (e) {
+	    
+	    var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) ||  // chrome & ie
+	                (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1));              // firefox
+	    var offsetTop = parseInt($('#container .farmBox ul').css('top'));
+	    var offsetHeight = $('#container .farmBox ul')[0].offsetHeight;
+	    var farmBoxHeight = $('#container .farmBox')[0].offsetHeight;
+	    //如果牧场总高度小于  最外层盒子高度就不允许滚动
+	    if(offsetHeight<farmBoxHeight){
+	    	return ;
+	    }else{
+	    	var offsetVal = offsetHeight -  farmBoxHeight ; 
+	    	if (delta >= 0) {
+		        // 向上滚
+	    		if(offsetTop>=0) return;
+			    $('#container .farmBox ul').css('top',offsetTop+20);
+		    } else if (delta < 0) {
+		        // 向下滚
+		    	if(offsetTop<-offsetVal) return;
+		        $('#container .farmBox ul').css('top',offsetTop-20);
+		    }
+	    }
+	   
+	});
+}
+        
+       
+    </script>
+</body>
+</html>
