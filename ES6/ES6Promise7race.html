@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*
+all方法的效果实际上是「谁跑的慢，以谁为准执行回调」，
+那么相对的就有另一个方法「谁跑的快，以谁为准执行回调」，这就是race方法，这个词本来就是赛跑的意思。
+race的用法与all一样，把上面runAsync3的延时改为0.5秒来看一下：
+*/ 
+Promise
+.race([runAsync1(), runAsync2(), runAsync3()])
+.then(function(results){
+    //返回三个异步请求最快的那个
+    console.log(results);
+});
+
+
+function runAsync1(){
+    var p = new Promise(function(resolve, reject){
+        //做一些异步操作
+        setTimeout(function(){
+            console.log('异步任务1执行完成');
+            resolve('随便什么数据1');
+        }, 1000);
+    });
+    return p;            
+}
+function runAsync2(){
+    var p = new Promise(function(resolve, reject){
+        //做一些异步操作
+        setTimeout(function(){
+            console.log('异步任务2执行完成');
+            resolve('随便什么数据2');
+        }, 2000);
+    });
+    return p;            
+}
+function runAsync3(){
+    var p = new Promise(function(resolve, reject){
+        //做一些异步操作
+        setTimeout(function(){
+            console.log('异步任务3执行完成');
+            resolve('随便什么数据3');
+        }, 500);
+    });
+    return p;            
+}   
+</script>
+</body>
+</html>
