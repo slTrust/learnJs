@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Promise的优势在于，
+        //可以在then方法中继续写Promise对象并返回，然后继续调用then来进行回调操作。
+        /*
+        链式操作的用法
+        Promise只是能够简化层层回调的写法，
+        而实质上，Promise的精髓是“状态”，用维护状态、传递状态的方式来使得回调函数能够及时调用，
+        它比传递callback函数要简单、灵活的多。
+        runAsync1()
+            .then(function(data){
+                console.log(data);
+                return runAsync2();
+            })
+            .then(function(data){
+                console.log(data);
+                return runAsync3();
+            })
+            .then(function(data){
+                console.log(data);
+            });
+        */
+        
+       
+    </script>
+</body>
+</html>

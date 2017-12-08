@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let myPromise = new Promise(function(resolve, reject){
+            //当异步代码执行成功时，我们才会调用resolve(...), 当异步代码失败时就会调用reject(...)
+            //使用setTimeout(...)来模拟异步代码  实际可以是Ajax请求
+            console.log('异步请求中');
+            setTimeout(function(){
+                resolve("成功!"); //2秒后代码执行成功  调用resolve
+            }, 2000);
+        });
+
+        myPromise.then(function(successMessage){
+            //successMessage的值是上面调用resolve(...)方法传入的值.
+            console.log("success! " + successMessage);
+        });
+        
+       
+    </script>
+</body>
+</html>

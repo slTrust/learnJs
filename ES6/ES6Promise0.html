@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //ES6之前  就是异步操作的回调函数
+        function runAsync(callback){
+            setTimeout(function(){
+                console.log('执行完成');
+                callback('只是一些数据而已');
+            }, 2000);
+        }
+
+        runAsync(function(data){
+            console.log(data);
+        });
+
+
+        //比如一些有三个请求的场景 每个请求成功之后才能调用下一个请求
+        /*
+        ==>  回调地狱
+        runAsync(function(data){
+            //第一个请求成功接收到数据  然后根据数据触发第二次请求
+            console.log('第一个请求完成！')
+            runAsync2(function(data2){
+                console.log('第二个请求完成！')
+                runAsync3(function(data3){
+                    console.log('第三个请求完成！')
+                    
+                })
+            })
+        })
+        
+        
+        */
+    </script>
+</body>
+</html>
