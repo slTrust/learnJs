@@ -39,6 +39,14 @@
                 item4.classList.remove(key);
             }
         } 
+
+        function addClass(node,classJson){
+            for(let key in classJson){
+                var value = classJson[key];
+                var methodName = value?'add':'remove';
+                node.classList[methodName](key);
+            }
+        }
         
     </script>
 </body>
