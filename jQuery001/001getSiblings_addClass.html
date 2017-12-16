@@ -28,9 +28,17 @@
         }
         console.log(array);
 
-        // 添加样式
-        var arrClass = ['a','b','c'];
-        arrClass.forEach((value)=>item3.classList.add(value));  
+        // 添加样式1
+        // var arrClass = ['a','b','c'];
+        // arrClass.forEach((value)=>item3.classList.add(value));  
+        var hashClass = {a:true,b:false,c:true};
+        for(let key in hashClass){
+            if(hashClass[key]){
+                item4.classList.add(key);
+            }else{
+                item4.classList.remove(key);
+            }
+        }
     </script>
 </body>
 </html>
