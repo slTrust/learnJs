@@ -17,6 +17,7 @@
         </ul>
     </div>
     <script>
+        //获取除自己外的所有兄弟
         var allChildren = item3.parentNode.children;
         var array = {length:0};
         for(let i=0;i<allChildren.length;i++){
@@ -27,6 +28,9 @@
         }
         console.log(array);
 
+        // 添加样式
+        var arrClass = ['a','b','c'];
+        arrClass.forEach((value)=>item3.classList.add(value));  
     </script>
 </body>
 </html>
