@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script>
+//https://zhuanlan.zhihu.com/p/23987456?refer=study-fe  
+// var 士兵 = {
+//   ID: 1, // 用于区分每个士兵
+//   兵种:"美国大兵",
+//   攻击力:5,
+//   生命值:42, 
+//   行走:function(){ /*走俩步的代码*/},
+//   奔跑:function(){ /*狂奔的代码*/  },
+//   死亡:function(){ /*Go die*/    },
+//   攻击:function(){ /*糊他熊脸*/   },
+//   防御:function(){ /*护脸*/       }
+// }
+
+/*
+（JS 原型链）用原型链可以解决重复创建的问题：
+    我们先创建一个「士兵原型」，
+    然后让「士兵」的 __proto__ 指向「士兵原型」
+    提取公共
+*/
+
+
+var 士兵原型 = {
+    兵种:"美国大兵",
+    攻击力:5,
+    行走:function(){ /*走俩步的代码*/},
+    奔跑:function(){ /*狂奔的代码*/  },
+    死亡:function(){ /*Go die*/    },
+    攻击:function(){ /*糊他熊脸*/   },
+    防御:function(){ /*护脸*/       }
+  }
+  var 士兵们 = [];
+  var 士兵;
+  for(var i=0; i<100; i++){
+    士兵 = {
+      ID: i, // ID 不能重复
+      生命值:42
+    }
+  
+    /*实际工作中不要这样写，因为 __proto__ 不是标准属性*/
+    士兵.__proto__ = 士兵原型 
+  
+    士兵们.push(士兵)
+  }
+ console.log(士兵们) 
+//   兵营.批量制造(士兵们)
+
+</script>
+</body>
+</html>

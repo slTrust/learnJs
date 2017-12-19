@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script>
+//https://zhuanlan.zhihu.com/p/23987456?refer=study-fe  
+
+
+function 士兵(ID){
+//   使用new 士兵的时候  会在内部创建一个临时对象
+//   var 临时对象  ={};
+//   并且帮你绑定原型
+//    临时对象.__proto__ = 士兵.原型
+
+  this.ID = ID
+  this.生命值 = 42
+//   最后 返回 临时对象
+//  return 临时对象
+}
+// 士兵.原型  统一叫做  士兵.prototype
+士兵.prototype = {
+  兵种:"美国大兵",
+  攻击力:5,
+  行走:function(){ /*走俩步的代码*/},
+  奔跑:function(){ /*狂奔的代码*/  },
+  死亡:function(){ /*Go die*/    },
+  攻击:function(){ /*糊他熊脸*/   },
+  防御:function(){ /*护脸*/       }
+}
+//   然后就可以愉快地引用「士兵」来创建士兵了：
+var 士兵们 = []
+for(var i=0; i<100; i++){
+  士兵们.push(new 士兵(i))
+}
+console.log(士兵们)
+</script>
+</body>
+</html>

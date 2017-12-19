@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script>
+//https://zhuanlan.zhihu.com/p/23987456?refer=study-fe  
+
+
+function 士兵(ID){
+  this.ID = ID
+  this.生命值 = 42
+}
+// 士兵.prototype = {
+//   constructor: 士兵, 
+//   兵种:"美国大兵",
+//   攻击力:5,
+//   行走:function(){ /*走俩步的代码*/},
+//   奔跑:function(){ /*狂奔的代码*/  },
+//   死亡:function(){ /*Go die*/    },
+//   攻击:function(){ /*糊他熊脸*/   },
+//   防御:function(){ /*护脸*/       }
+// }
+
+//如果像上面那样原型 = 对象  就要设置constructor: 士兵 防止它丢失创建者
+// 如果你重新对「士兵.prototype」赋值，那么这个 constructor 属性就没了，所以你应该这么写：
+士兵.prototype.兵种 = "美国大兵";
+士兵.prototype.攻击力 = 5;
+士兵.prototype.行走=function(){ /*走俩步的代码*/};
+士兵.prototype.奔跑=function(){ /*狂奔的代码*/  };
+士兵.prototype.死亡=function(){ /*Go die*/    };
+士兵.prototype.攻击=function(){ /*糊他熊脸*/   };
+士兵.prototype.防御=function(){ /*护脸*/       };
+
+
+//   然后就可以愉快地引用「士兵」来创建士兵了：
+var 士兵们 = []
+for(var i=0; i<100; i++){
+  士兵们.push(new 士兵(i))
+}
+console.log(士兵们)
+</script>
+</body>
+</html>
