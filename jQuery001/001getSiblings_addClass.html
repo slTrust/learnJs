@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <ul>
+            <li id="item1">选项1</li>
+            <li id="item2">选项2</li>
+            <li id="item3">选项3</li>
+            <li id="item4">选项4</li>
+            <li id="item5">选项5</li>
+        </ul>
+    </div>
+    <script>
+        //获取除自己外的所有兄弟
+        var allChildren = item3.parentNode.children;
+        var array = {length:0};
+        for(let i=0;i<allChildren.length;i++){
+            if(allChildren[i]!==item3){
+                array[array.length] = allChildren[i];
+                array.length += 1; 
+            }
+        }
+        console.log(array);
+
+        // 添加样式1
+        // var arrClass = ['a','b','c'];
+        // arrClass.forEach((value)=>item3.classList.add(value));  
+        var hashClass = {a:true,b:false,c:true};
+        for(let key in hashClass){
+            if(hashClass[key]){
+                item4.classList.add(key);
+            }else{
+                item4.classList.remove(key);
+            }
+        } 
+
+        function addClass(node,classJson){
+            for(let key in classJson){
+                var value = classJson[key];
+                var methodName = value?'add':'remove';
+                node.classList[methodName](key);
+            }
+        }
+    </script>
+</body>
+</html>

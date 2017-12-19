@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// fn1不会立即执行  会生成一个词法树 校验里面的每句话  如果有错误就停止执行 反之没错再去执行 
+/*
+  fn1 调用的时候不会立即执行
+  而是会生成一个抽象语法树  
+  校验里面的每句话  如果有错误就停止执行 
+  没错再从头开始执行 
+ 一个函数能访问那些变量 在做词法分析的时候就确定了
+> 词法树分析的是语义  
+> 只能确认a就是这个函数内部的a  
+> 不能确定的是“值”
+
+*/
+var global = 1;
+function fn1(param1){
+    var local1 = 'local1';
+    var local2 = 'local2';
+    function fn2(param2){
+        var local2 = 'fn2 local2';
+        console.log(local1);
+        console.log(local2);
+    }
+
+    function fn3(){
+        var local2 = 'fn3 local2';
+        fn2(local2);
+    }
+}
+</script>
+</body>
+</html>

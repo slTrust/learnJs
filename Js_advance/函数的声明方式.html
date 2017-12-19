@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// 匿名函数
+// function(){ return 1 ;}  匿名函数 相当于废话    会报错   你只有给了引用才能使用
+//fn 记录的是函数的地址 
+var fn = function(){
+    return 1;
+} 
+console.log(fn.name) //fn
+var fn2 = fn;
+console.log(fn2.name)//fn 
+
+// 具名函数
+function fn3(){
+    return 1;
+}
+console.log(fn3); //可以访问 
+
+// 将具名函数复制给一个变量  
+var fn4 = function fn5(){return 1;}
+console.log(fn4.name)  //fn5
+// 这个具名函数的作用域就是他函数本身那部分  外部访问不到
+// console.log(fn5) //fn5 is not defined
+// console.log(fn5.name) //报错
+
+function fn6(){return 1;}
+var fn7 = fn6;
+console.log(fn6.name) //fn6
+console.log(fn7.name) //fn6
+console.log(fn7) //function fn6(){return 1;}
+
+
+// 箭头函数 
+var fn8 = ()=>1; //无参数 返回1
+var fn9 = i=>i+1; //有参数返回 参数+1；
+var fn10 =(i,j)=>{
+    console.log(i)
+    console.log(j)
+    return i+j
+} //有参数  并且函数内部有多条语句    
+console.log(fn8.name) //fn8 
+// 箭头函数和  匿名函数 具名函数唯一的区别就是  this
+</script>
+</body>
+</html>

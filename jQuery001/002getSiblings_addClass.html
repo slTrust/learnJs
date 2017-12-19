@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <ul>
+            <li id="item1">选项1</li>
+            <li id="item2">选项2</li>
+            <li id="item3">选项3</li>
+            <li id="item4">选项4</li>
+            <li id="item5">选项5</li>
+        </ul>
+    </div>
+    <script>
+       
+        // 添加样式1
+        function addClass(node,classJson){
+            for(let key in classJson){
+                var value = classJson[key];
+                var methodName = value?'add':'remove';
+                node.classList[methodName](key);
+            }
+        }
+
+        function getSiblings(node){
+            var allChildren = node.parentNode.children;
+            var array = {length:0};
+            for(let i=0;i<allChildren.length;i++){
+                if(allChildren[i]!==item3){
+                    array[array.length] = allChildren[i];
+                    array.length += 1; 
+                }
+            }
+            return array;
+        }
+        // 简易封装  ==》命名空间   好处是避免你的方法覆盖别人的变量或者方法
+        window.myDom = {};
+        myDom.getSiblings = getSiblings;
+        myDom.addClass = addClass;
+        console.log(myDom.getSiblings(item3));
+        myDom.addClass(item3,{a:true,b:false,c:true})
+    </script>
+</body>
+</html>
