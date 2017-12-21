@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0;}
+        .one{height: 180px;width: 180px;background: #ccc;position: relative;}
+        .one .pos{position: absolute;height:60px;width:60px;line-height: 60px;font-size: 30px;border-radius: 50%;background:#e22828;text-align: center;}
+        .one .pos.left{left:0;top:60px;}
+        .one .pos.right{right:0;top:60px;}
+        .one .pos.top{left:60px;top:0;}
+        .one .pos.bottom{bottom:0;left:60px;}
+        .clearfix::after{content:'';display: block;clear:both;}
+    </style>
+</head>
+<body>
+    <h2>vim</h2>
+    <p>打开git bash 输入vimtutor 便可以查看教程</p>
+    <h3>第一章移动光标</h3>
+    <div class="one clearfix">
+        <div class="pos top">K</div>
+        <div class="pos left">H</div>
+        <div class="pos right">L</div>
+        <div class="pos bottom">J</div>
+    </div>
+    <h3>进出与退出</h3>
+    <p>step1:按下Esc</p>
+    <p>step2: 输入 ":q!" 回车 冒号 q 感叹号  回车</p>
+<script>
+</script>
+</body>
+</html>
