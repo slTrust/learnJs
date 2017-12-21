@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h4>置入类命令</h4>
+    <p>  a)fsdafdsafsa</p>
+    <p>  c)fdsafsdsd</p>
+    <p>  b)fdsfjkljkl</p>
+    <p>  d)fdsfjkljkl</p>
+    <p>光标移动到c)这行  然后输入 dd就删除了整行</p>
+    <p>然后光标移动到b这行  输入 p 你会发现删除的c)会插入到 b)之后</p>
+    <h4>r命令 输入 r 和一个字符替换光标所在位置的字符</h4>
+    <p>Whan 光标移动到 a之前 输入r 然后再输入e ==》  When</p>
+    <h4>ce更改类命令</h4>
+    <textarea name=""  style="width:100%;height:700px;">
+              ** 要改变文本直到一个单词的末尾，请输入 ce **
+              1. 请将光标移动到本节中下面标记有 ---> 的第一行。
+              2. 接着把光标放在单词 lubw 的字母 u 的位置那里。
+              3. 然后输入 cw 以及正确的单词(在本例中是输入 ine )。
+              4. 最后按 <ESC> 键，然后光标定位到下一个错误第一个准备更改的字母处。
+              5. 重复步骤3和步骤4，直到第一个句子完全雷同第二个句子。
+            ---> This lubw has a few wptfd that mrrf changing usf the change operator.
+            ---> This line has a few words that need changing using the change operator.
+            提示：请注意 ce 命令不仅仅是删除了一个单词，它也让您进入插入模式了。
+            
+            使用c更改更多
+                       ** 更改类操作符可以与删除中使用的同样的动作配合使用。 **
+              1. 更改类操作符的工作方式跟删除类是一致的。操作格式是：
+                     c    [number]   motion
+              2. 动作参数(motion)也是一样的，比如 w 代表单词，$代表行末等等。
+              3. 请将光标移动到本节中下面标记有 ---> 的第一行。
+              4. 接着将光标移动到第一个错误处。
+              5. 然后输入 c$ 使得该行剩下的部分更正得同第二行一样。最后按 <ESC> 键。
+            ---> The end of this line needs some help to make it like the second.
+            ---> The end of this line needs to be corrected using the  c$  command.
+            
+    </textarea>
+    <script></script>
+</body>
+</html>
