@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .contentBox{
+      width: 300px;
+      height: 200px;
+      overflow: hidden;
+    }
+    .content{
+      display: flex;
+      align-items: flex-start;
+      transition: all 0.5s;
+      }
+    .content img{vertical-align: top;}
+    .red{color:red;}
+  </style>
+</head>
+<body>
+  <div class="contentBox">
+    <div class="content">
+      <img src="./img/a01.jpg" alt="">
+      <img src="./img/a02.jpg" alt="">
+      <img src="./img/a03.jpg" alt="">
+      <img src="./img/a04.jpg" alt="">
+    </div>
+  </div>
+  <div class="buttonBox">
+    <span>第一张</span>
+    <span>第二张</span>
+    <span>第三张</span>
+    <span>第四张</span>
+  </div>
+  <script src="./jquery-3.1.1.js"></script>
+  <!-- <script src="./main_jq.js"></script> -->
+  <script>
+    var aBtn = document.querySelectorAll('.buttonBox span');
+    var len = aBtn.length;
+    for(let i=0;i<len;i++){
+        $(aBtn[i]).on('click',(e)=>{
+          var index = $(e.currentTarget).index();
+          var p = -index*300;
+          $('.content').css({'transform':'translateX('+p+'px)'});
+        })
+    }
+    var n = 0;
+    $(aBtn).eq(n%len).trigger('click').addClass('red').siblings('.red').removeClass('red');
+    var timer = setTimer(aBtn);
+    $('.content').on('mouseenter',()=>{clearInterval(timer);})
+    $('.content').on('mouseleave',()=>{timer = setTimer(aBtn);});
+    function setTimer(activeBtn){
+        return setInterval(()=>{
+                    n++;
+                    $(activeBtn).eq(n%len).trigger('click').addClass('red').siblings('.red').removeClass('red');
+                },1000);
+    }
+  </script>
+</body>
+</html>
