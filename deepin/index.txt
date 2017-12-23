@@ -1,2 +1,5 @@
 http://blog.csdn.net/lifan5/article/details/7350154 深度虚拟机没有curl命令
+wget http://curl.haxx.se/download/curl-7.57.0.tar.gz 运行这个版本的
+
+
 http://blog.csdn.net/sinat_27714067/article/details/71055324 deepin下安装curl
