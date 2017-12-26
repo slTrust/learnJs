@@ -4,51 +4,23 @@
     <meta charset="UTF-8">
     <title></title>
     <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
-        #container{
-            width: 1000px;
-            height: 550px;
-            border: 1px solid #000;
-            margin: 100px auto;
-        }
-        #ground{
-            width: 1000px;
-            height: 500px;
-            position: relative;
-        }
-        #button{
-            float: right;
-            height: 50px;
-            line-height: 50px;
-        }
-        button{
-            width: 50px;
-            height: 20px;
-            cursor: pointer;
-        }
-        .block{
-            width: 20px;
-            height: 20px;
-            background: #e9e9e9;
-            float: left;
-        }
-        .snakeBody{
-            width: 20px;
-            height: 20px;
-            position: absolute;
-            border-radius: 4px;
-            background: #afaeae;
-        }
-        .food{
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: rgb(68, 70, 68);
-            position: absolute;
-        }
+        *{margin: 0; padding: 0;}
+        #container{ width: 1000px; height: 550px; border: 1px solid #000; margin: 100px auto;}
+        #ground{width: 1000px;height: 500px;position: relative;}
+        #button{ float: right; height: 50px;line-height: 50px;}
+        button{width: 50px; height: 20px;cursor: pointer; }
+        .block{ width: 20px; height: 20px;background: #e9e9e9;float: left; }
+        .snakeBody{width: 20px;height: 20px;position: absolute;border-radius: 4px;background: #afaeae;}
+        .food{width: 20px;height: 20px;border-radius: 50%;background: rgb(68, 70, 68);position: absolute;}
+        .left_active::after,.left_active::before,.right_active::after,.right_active::before,.up_active::after,.up_active::before,.down_active::after,.down_active::before{ display:block;position: absolute; height: 3px; width: 3px; background: red; content:'';}
+        .left_active::after{left:4px;top:4px;}
+        .left_active::before{left:4px;bottom:4px;}
+        .right_active::after{right:4px;top:4px;}
+        .right_active::before{right:4px;bottom:4px;}
+        .up_active::after{left:4px;top:4px;}
+        .up_active::before{right:4px;top:4px;}
+        .down_active::after{left:4px;bottom:4px;}
+        .down_active::before{right:4px;bottom:4px;}
     </style>
 </head>
 <body>
@@ -66,15 +38,15 @@
     var timer;
     window.onload=function(){
         var oGround = document.getElementById('ground')
-        createGrass.call('',oGround,25,50);
-        createSnake.call('',oGround);
-        createFood.call();
+        createGrass(oGround,25,50);
+        createSnake(oGround);
+        createFood();
         document.getElementById('start').onclick=function(){
             clearInterval(timer);  //防止多次点击开始
             timer=setInterval(function(){
-                snakeMove('',currentDirection);
+                snakeMove(currentDirection);
             },150);
-            snakeMove.call('',currentDirection);
+            snakeMove(currentDirection);
         };
         document.getElementById('pause').onclick=function(){
             clearInterval(timer);
@@ -140,6 +112,7 @@
     function snakeMove(direction){  //direction用于作为蛇移动的四个方向的判断
         //获取蛇头
         var snakeHead = snakeBody[0];
+        snakeHead.className = 'snakeBody '+direction+'_active';
         //改变方向
         currentDirection = direction;
         //移动就是 让后一个div的坐标等于前一个div的坐标 (不包括蛇头 蛇头是根据具体的方向)
