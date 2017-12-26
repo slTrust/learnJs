@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #container{
+            width: 1000px;
+            height: 550px;
+            border: 1px solid #000;
+            margin: 100px auto;
+        }
+        #ground{
+            width: 1000px;
+            height: 500px;
+            position: relative;
+        }
+        #button{
+            float: right;
+            height: 50px;
+            line-height: 50px;
+        }
+        button{
+            width: 50px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .block{
+            width: 20px;
+            height: 20px;
+            background: #e9e9e9;
+            float: left;
+        }
+        .snakeBody{
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            border-radius: 4px;
+            background: #afaeae;
+        }
+        .food{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgb(68, 70, 68);
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="ground"></div>
+    <div id="gameControl">
+        <div id="button">
+            <button id="start">开始</button>
+            <button id="pause">暂停</button>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var timer;
+    window.onload=function(){
+        var oGround = document.getElementById('ground')
+        createGrass.call('',oGround,25,50);
+        createSnake.call('',oGround);
+        createFood.call();
+        document.getElementById('start').onclick=function(){
+            clearInterval(timer);  //防止多次点击开始
+            timer=setInterval(function(){
+                snakeMove('',currentDirection);
+            },150);
+            snakeMove.call('',currentDirection);
+        };
+        document.getElementById('pause').onclick=function(){
+            clearInterval(timer);
+        };
+    };
+
+    
+    //step1 创建草坪 row n  column 2n的小格子组成
+    function createGrass(container,row,column){
+        for(var i=0;i<row;i++){
+            for(var j=0;j<column;j++){
+                var oDiv = document.createElement('div');
+                oDiv.className = 'block';
+                container.appendChild(oDiv);
+            }
+        }
+    }
+    //step2 构建蛇需要的变量 
+    // snakeBody 蛇身 用来存div的数组  
+    // oFood 食物 
+    // currentDirection 初始的移动方向
+    var snakeBody=[],oFood,currentDirection='left';
+    
+    //step3创建蛇  是绝对定位的
+    function createSnake(container){
+        for(var i=0;i<3;i++){
+            var oDiv = document.createElement('div');
+            oDiv.className = 'snakeBody';
+            oDiv.style.left = (i+40)*20+'px';
+            oDiv.style.top = '60px';
+            container.appendChild(oDiv);
+            snakeBody.push(oDiv)
+        }
+    }
+    //step4创建食物  
+    function createFood(){
+        var oGround = document.getElementById('ground')
+        //判断食物与蛇身重叠的标志
+        var flag = true;
+        var left = rnd(0,49);
+        var top = rnd(0,24);
+        //循环蛇身  如果蛇身的 坐标与 随机生成的坐标一致就改变重叠的标志 flag
+        var len =snakeBody.length;
+        for(var i=0;i<len;i++){
+            var posL = snakeBody[i].offsetLeft;
+            var posT = snakeBody[i].offsetTop;
+            if(posL===left&&posT===top){
+                flag = false;
+                return;
+            }
+        }
+        if(flag){
+            oFood = document.createElement('div');
+            oFood.className = 'food';
+            oFood.style.left = left*20+'px';
+            oFood.style.top = top*20+'px';
+            oGround.appendChild(oFood);
+        }else{
+            createFood();
+        }
+    }
+    //step5 蛇运动
+    function snakeMove(direction){  //direction用于作为蛇移动的四个方向的判断
+        //获取蛇头
+        var snakeHead = snakeBody[0];
+        //改变方向
+        currentDirection = direction;
+        //移动就是 让后一个div的坐标等于前一个div的坐标 (不包括蛇头 蛇头是根据具体的方向)
+        for(var i=snakeBody.length-1;i>0;i--){
+            snakeBody[i].style.left = snakeBody[i-1].offsetLeft+'px';
+            snakeBody[i].style.top = snakeBody[i-1].offsetTop+'px';
+        } 
+
+        switch(direction){
+            case 'left':{snakeHead.style.left = snakeHead.offsetLeft-20+'px';}break;
+            case 'right':{snakeHead.style.left = snakeHead.offsetLeft+20+'px';}break;
+            case 'up':{snakeHead.style.top = snakeHead.offsetTop-20+'px';}break;
+            case 'down':{snakeHead.style.top = snakeHead.offsetTop+20+'px';}break;
+        }
+        // step7 边检检查 撞墙就死了
+        if(snakeHead.offsetLeft === -20||snakeHead.offsetLeft === 1000||snakeHead.offsetTop === -20||snakeHead.offsetTop===500){
+            clearInterval(timer);
+            if(confirm('再来一次?')){
+                window.location.reload();
+            }
+        }
+        //step8 碰到自己
+        for(var j=1;j<snakeBody.length;j++){
+            if(snakeHead.offsetLeft == snakeBody[j].offsetLeft && snakeHead.offsetTop == snakeBody[j].offsetTop){
+                clearInterval(timer);
+                if(confirm('再来一次')){
+                    window.location.reload();
+                }
+            }
+        }
+        //step9吃掉食物
+        if(snakeHead.offsetLeft==oFood.offsetLeft && snakeHead.offsetTop==oFood.offsetTop){
+            oFood.className='snakeBody snake-block';  //食物变成和蛇身一样的颜色
+            //让食物补到蛇身最后
+            oFood.style.left=snakeBody[snakeBody.length-1].offsetLeft+'px';
+            oFood.style.top=snakeBody[snakeBody.length-1].offsetTop+'px';
+            snakeBody.push(oFood);  //这里最好用push把吃掉的div添加到蛇尾,添加到头部有一个问题，吐过实物div是靠边生成，那么吃掉后会超出墙范围或者直接撞墙
+            createFood();
+        }
+    }
+
+    //step6 监听移动
+    //上下左右操作
+    document.onkeydown=function(e){ 
+        var event=e || window.event;
+        var direction = event.keyCode;
+        switch (direction){
+            case 37:
+                //防止它按与蛇头向反的方向走  往左走 <<< 它按 右
+                if(currentDirection != 'right'){
+                    snakeMove('left');
+                }
+            break;  //左
+            case 39:
+                if(currentDirection != 'left'){
+                    snakeMove('right');
+                }
+            break;  //右
+            case 38:
+                if(currentDirection != 'down'){
+                    snakeMove('up');
+                }
+            break;  //上
+            case 40:if(currentDirection != 'up'){
+                snakeMove('down');
+            }
+            break;  //下
+        }
+    }
+
+
+    function rnd(m,n){return Math.ceil(Math.random()*(n-m)+m);}
+    
+</script>
+</html>
