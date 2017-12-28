@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // step1先建立一个闭包
+    (function(window,document){
+        //step2传入了window,document并且在内部将他们缓存起来.
+        var w = window,doc=document;
+        
+        //step3 无new调用  每次调用 jQ()的时候都能返回一个 jQ实例 
+        var jQ = function(selector) {
+            return new jQ.prototype.init(selector);
+        }
+        //step4 设置他的原型
+        jQ.prototype = {
+            constructor : jQ, //指定他的创建者
+            length : 0,       
+            splice: [].splice,//这样就有了数组的方法
+            selector : '',   
+            init : function(selector) {//dom选择的一些判断
+
+            }
+        }
+        //step5 因为无new调用 return new jQ.prototype.init 所以需手动把init的prototype指向jQ的prototype
+        jQ.prototype.init.prototype = jQ.prototype;
+
+        //step6 挂载方法  静态方法
+        jQ.ajax = function() { //直接挂载方法  可jQ.ajax调用
+            console.log(this);
+            return this;
+        }
+        
+        //step7 在window上暴露接口
+        window.jQuery = jQ;
+        window.$ = jQ;
+
+    })(window,document)
+</script>
+</body>
+</html>

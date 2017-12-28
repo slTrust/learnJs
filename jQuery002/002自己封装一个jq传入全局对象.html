@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // step1先建立一个闭包
+    (function(window,document){
+        //step2传入了window,document并且在内部将他们缓存起来.
+        var w = window,doc=document;
+    })(window,document)
+</script>
+</body>
+</html>
