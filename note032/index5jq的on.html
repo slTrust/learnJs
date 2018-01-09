@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+  <style>
+      body{
+        border: 1px solid red;
+        }
+        .wrapper{
+        position: relative;
+        display: inline-block;
+        }
+        .popover{
+        border: 1px solid red;
+        position: absolute;
+        left: 100%;
+        top: 0;
+        white-space: nowrap;
+        padding: 10px;
+        margin-left: 10px;
+        background: white;
+        display: none;
+        }
+        .popover::before{
+        position: absolute;
+        right: 100%;
+        top: 5px;
+        border: 10px solid transparent;
+        border-right-color: red;
+        content: '';
+        }
+        .popover::after{
+        position: absolute;
+        right: 100%;
+        top: 5px;
+        border: 10px solid transparent;
+        border-right-color: white;
+        content: '';
+        margin-right: -1px;
+        }
+  </style>
+</head>
+<body>
+  <div id="wrapper" class="wrapper">
+    <button id="clickMe">点我</button>
+    <div id="popover" class="popover">
+      <input type="checkbox"> 浮层
+    </div>
+  </div>
+<script src="./jquery-3.1.1.js"></script>
+<script>
+// clickMe.addEventListener('click', function(e){
+//     popover.style.display = 'block';
+// })
+// wrapper.addEventListener('click',function(e){
+//     //解决点击浮层触发的冒泡
+//     e.stopPropagation()
+// })
+// // 如果是100个浮层  就要有100个事件队列  这样很耗性能  改用jq
+// document.addEventListener('click', function(){
+//     popover.style.display = 'none'
+// })
+$(clickMe).on('click',function(){
+    $(popover).show();
+});
+
+// $(wrapper).on('click',false)  
+//这样既阻止了事件冒泡而且还阻止了默认行为  
+//阻止默认行为 会导致checkbox不选中
+/*
+
+$(wrapper).on('click',function(e){
+    e.stopPropagation(); //阻止冒泡
+    e.preventDefault(); //阻止默认事件
+});
+*/
+//所以只能这样写  单独阻止它的冒泡
+$(wrapper).on('click',function(e){
+    e.stopPropagation(); //阻止冒泡
+});
+
+$(document).on('click',function(){
+    $(popover).hide();
+})
+</script>
+</body>
+</html>
