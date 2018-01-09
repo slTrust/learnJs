@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ol,li{list-style: none;}
+        *{margin:0;padding:0;}
+        #slider{
+            width:360px;
+            height: 200px;
+            overflow: hidden;
+            margin:100px auto;
+            position: relative;
+        }
+        #slider>ul{
+            width:1800px;
+            height: 200px;
+            position: absolute;
+            left:0px;
+            top:0;
+        }
+        #slider>ul>li,#slider>ul>li>img{
+            display: block;
+            width:360px;
+            height: 200px;
+        }
+        #slider>ul>li{
+            float:left;
+        }
+        #slider>ol{
+            position: absolute;
+            right:0;
+            bottom:10px;
+        }
+        #slider>ol>li{
+            float:left;
+            margin-right: 10px;
+            height: 20px;
+            width: 30px;
+            background: rgba(0,0,0,0.8);
+        }
+        #slider>ol>li.on{
+            background: pink;
+        }
+        clearfix::after{
+            display: block;
+            content:'';
+            clear:both;
+        }
+    </style>
+</head>
+<body>
+    <div id="slider">
+        <ul class="clearfix">
+            <li><img src="./IMG/a01.jpg" alt=""></li>
+            <li><img src="./IMG/a02.jpg" alt=""></li>
+            <li><img src="./IMG/a03.jpg" alt=""></li>
+            <li><img src="./IMG/a04.jpg" alt=""></li>
+            <li><img src="./IMG/a05.jpg" alt=""></li>
+        </ul>
+        <ol class="clearfix">
+            <li class="on"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol>
+    </div>
+    <script src="./move.js"></script>
+    <script>
+        window.onload = function(){
+            var oDiv = document.getElementById('slider');
+            var oUl = oDiv.children[0];
+            var oOl = oDiv.children[1];
+            var aBtn = oOl.children;
+           
+            var aLi = oDiv.children[0].children;
+            for(var i=0;i<aBtn.length;i++){
+
+                aBtn[i].index = i;
+                aBtn[i].onmouseover = function(){
+                    
+                    for(var i=0;i<aBtn.length;i++){
+                        aBtn[i].className = '';
+                    }
+                    var idx = this.index;
+                    this.className = 'on';
+                    move(oUl,{left:-360*idx},{easing:'ease-in',duration:500})
+                }
+            }
+
+        }
+
+       
+    </script>
+</body>
+</html>
