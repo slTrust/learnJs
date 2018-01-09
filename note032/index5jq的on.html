@@ -75,7 +75,7 @@ $(wrapper).on('click',function(e){
     e.preventDefault(); //阻止默认事件
 });
 */
-//所以只能这样写  单独阻止它的冒泡
+//所以只能这样写  单独阻止它的冒泡 不阻止默认事件
 $(wrapper).on('click',function(e){
     e.stopPropagation(); //阻止冒泡
 });
