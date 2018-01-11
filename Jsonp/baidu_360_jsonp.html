@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0;list-style: none;}
+        #search1,#search2{
+            float:left;
+            width:50%;
+            min-height:500px;
+        }
+        #search2{
+            background: rgb(240, 236, 236);
+        }
+    </style>
+</head>
+<body>
+    <div id="search1">
+        <p>百度模糊搜索</p>
+        <input type="text" id="oT1">
+        <ol id="ol1">
+
+        </ol>
+    </div>
+    <div id="search2">
+            <p>360模糊搜索</p>
+        <input type="text" id="oT2">
+        <ol id="ol2">
+
+        </ol>
+    </div>
+    <script src="./jsonp.js"></script>
+    <script>
+        window.onload = function(){
+            oT1.onkeyup = function(){
+                jsonp({
+                    url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+                    cbName:'cb',
+                    data:{wd:oT1.value},
+                    success:function(data){
+                        console.log(data.s);
+                        showData(ol1,data.s)
+                    }
+                })
+            }
+
+            oT2.onkeyup = function(){
+                jsonp({
+                    url:'https://sug.so.360.cn/suggest',
+                    cbName:'callback',
+                    data:{word:oT2.value},
+                    success:function(data){
+                        console.log(data.s);
+                        showData(ol2,data.s)
+                    }
+                })
+              
+            }
+        }
+
+        function showData(container,arr){
+            container.innerHTML = '';
+            for(var i=0;i<arr.length;i++){
+                var oLi = document.createElement('li');
+                oLi.textContent = arr[i];
+                container.appendChild(oLi);
+            }
+        }
+    </script>
+</body>
+</html>
