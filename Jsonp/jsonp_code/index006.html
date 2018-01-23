@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h5>您的账户余额是 <span id="amount">&&&amount&&&</span></h5>
+    <button id="btn">打钱</button>
+    <script>
+        btn.addEventListener('click',function(){
+            let script = document.createElement('script');
+            script.src = '/pay';
+            document.body.appendChild(script);
+            //我们如何知道请求成功or失败呢？ 
+            script.onload = function(){
+                alert('打钱成功')
+            }
+            script.onerror = function(){
+                alert('打钱失败')
+            }
+        })
+    </script>
+</body>
+</html>
