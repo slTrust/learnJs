@@ -9,9 +9,10 @@ function obj2str(obj){
     return str;
 }
 function ajax(paramObj){
-    let paramObj = paramObj||{};
+    var paramObj = paramObj||{};
     paramObj.type = paramObj.type||'GET';
     paramObj.url = paramObj.url||'';
+    paramObj.data = paramObj.data||{};
     if(paramObj.url === ''){ alert('请给我一个url'); return}
     
     let httpRequest = new XMLHttpRequest();
@@ -39,15 +40,15 @@ function ajax(paramObj){
     }
 
 }
+    
 //调用
 ajax({
     type:"get",
-    url:'/xxx',
-    data:{user:"hjx"},
+    url:'./1.txt',
     success:function(res){
         console.log(res);
     },
     error:function(err){
-        console.log(res);
+        console.log(err);
     }
 })
