@@ -46,9 +46,9 @@ ajax({
     type:"get",
     url:'./1.txt',
     success:function(res){
-        console.log(res);
+        alert(res);
     },
     error:function(err){
-        console.log(err);
+        alert(err);
     }
 })
