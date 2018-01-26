@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="pass">
+    <button id="btn">提交</button>
+    <script>
+
+        btn.addEventListener('click',function(){
+            let request = new XMLHttpRequest();
+            console.log(request.readyState)
+            request.onreadystatechange = function(){
+                console.log(request.readyState)
+                if(request.readyState === 4){
+                    if(request.status >= 200 && request.status <300){
+                        console.log(request.responseText);
+                    }else{
+                        console.log(request.status);
+                    }
+                }
+            }
+            request.open('get','/xxx');
+            request.send();
+
+           
+
+        })
+    </script>
+</body>
+</html>
