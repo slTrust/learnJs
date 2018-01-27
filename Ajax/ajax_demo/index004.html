@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="pass">
+    <button id="btn">提交</button>
+    <script>
+        window.jQuery = function(queryString){
+            let nodes = {};
+            nodes.addClass = function(){}
+            nodes.html = function(){}
+            return nodes;
+        }
+
+        window.jQuery.ajax = function(url,method,body,successFn,failFn){
+            let request = new XMLHttpRequest();
+            request.open(method,url);
+            request.send(body);
+            request.onreadystatechange = function(){
+                if(request.readyState === 4){
+                    if(request.status >= 200 && request.status <300){
+                        successFn.call(undefined,request.responseText)
+                    }else{
+                        failFn.call(undefined,request.status)
+                    }
+                }
+            }
+        }
+
+        btn.addEventListener('click',function(){
+            window.jQuery.ajax(
+                '/xxx',
+                'get',
+                'a=1&b=2',
+                (res)=>{console.log(res)},
+                (err)=>{console.log()}
+            );
+        })
+    </script>
+</body>
+</html>
