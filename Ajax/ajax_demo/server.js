@@ -22,7 +22,7 @@ var server = http.createServer(function(request, response){
   console.log('被请求后：含查询字符串的路径\n' + pathWithQuery)
 
   if(path=='/'){
-    var string = fs.readFileSync('./index006.html','utf8');
+    var string = fs.readFileSync('./index007.html','utf8');
     response.setHeader('Content-Type','text/html;charset=utf-8');
     response.write(string);
     response.end();
