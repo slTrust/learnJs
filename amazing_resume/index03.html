@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <pre id="code"></pre>
+    <script>
+        var result =`
+            body{
+                background:red;
+            }
+        `;
+        //浏览器会把连续出现的多个空格或者tab 当作一个空格
+        var n = 0;
+        var timer = setInterval(function(){
+
+            n++;
+            //替换成pre标签
+            code.innerHTML = result.substring(0,n);
+            console.log('一轮')
+            if(n>=result.length){
+                clearInterval(timer);
+            }
+        },30)
+    </script>
+</body>
+</html>
